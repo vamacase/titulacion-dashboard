@@ -27,9 +27,25 @@ section h3{font-size:.88rem;font-weight:600;color:#475569;margin-bottom:.6rem}
 .badge{display:inline-block;padding:.2rem .55rem;border-radius:999px;font-size:.72rem;font-weight:700;color:#fff;background:#64748b}
 .badge-warn{background:#d97706}
 .badge-danger{background:#dc2626}
+.chart-scroll{overflow-x:auto}
 .chart-wrap{position:relative;width:100%}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
-@media(max-width:768px){.two-col{grid-template-columns:1fr}}
+.filter-bar{display:flex;align-items:center;gap:.7rem;background:#fff;border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem}
+.filter-bar label{font-weight:700;color:var(--dark)}
+.filter-bar select{border:1px solid var(--border);border-radius:6px;background:#fff;padding:.45rem .7rem;color:#334155}
+.dashboard-panel{display:flex;flex-direction:column;gap:2.5rem}
+.dashboard-panel[hidden]{display:none}
+@media(max-width:768px){
+  header{padding:1rem;flex-wrap:wrap}
+  header .meta{margin-left:0;width:100%}
+  nav{padding:.5rem 1rem;gap:.5rem;overflow-x:auto;white-space:nowrap}
+  main{margin:1rem auto;padding:0 1rem;gap:1rem}
+  section{padding:1rem}
+  .kpi-grid{display:grid;grid-template-columns:1fr}
+  .kpi-card{min-width:0}
+  .two-col{grid-template-columns:1fr}
+  .filter-bar{align-items:stretch;flex-direction:column}
+}
 .ok{color:#16a34a;font-weight:600;padding:.5rem 0}
 .warn{color:#d97706}
 footer{text-align:center;font-size:.75rem;color:#94a3b8;padding:2rem}
@@ -42,30 +58,38 @@ footer{text-align:center;font-size:.75rem;color:#94a3b8;padding:2rem}
 Chart.register(ChartDataLabels);
 const ChartAnnotation = window['chartjs-plugin-annotation'];
 if (ChartAnnotation) Chart.register(ChartAnnotation);
+function compactLabel(value) {
+  const label = this.getLabelForValue(value);
+  if (window.innerWidth > 768) return label;
+  const partes = label.split(' ');
+  return partes.slice(0, 2).join(' ');
+}
 </script>
 </head>
 <body>
 <header>
   <h1>Dashboard Titulacion FAU-UG</h1>
-  <div class="meta">Periodo: 2026 - 2027 TI1 &nbsp;|&nbsp; Semana 7 &nbsp;|&nbsp; 16/05/2026</div>
+  <div class="meta">Periodo: 2026 - 2027 TI1 &nbsp;|&nbsp; Semana 7 &nbsp;|&nbsp; 18/05/2026</div>
 </header>
 <nav><a href="#kpis">Resumen</a><a href="#pendientes">Pendientes</a><a href="#retraso">Avance</a><a href="#baja">Baja asistencia</a><a href="#notas">Notas</a></nav>
-<main><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">276</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">131</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">47% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">145</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">53% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">145</div><div class="kpi-label">Asistencia en riesgo &lt;80%</div><div class="kpi-sub">53% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">7</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<main><div class="filter-bar"><label for="filtro-carrera">Carrera</label><select id="filtro-carrera"><option value="todas">Todas las carreras</option><option value="c1">ARQUITECTURA (SEMESTRAL)</option><option value="c2">ARQUITECTURA-2018</option></select></div><div class="dashboard-panel" data-scope="todas"><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">276</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">78</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">28% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">197</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">71% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">197</div><div class="kpi-label">Asistencia en riesgo &lt;80%</div><div class="kpi-sub">71% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">7</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes">
 <h2>Tutores con asistencia pendiente
-  <span class="badge badge-danger">33 tutores &middot; 131 estudiantes</span>
+  <span class="badge badge-danger">17 tutores &middot; 78 estudiantes</span>
 </h2>
-<div class="chart-wrap" style="height:924px">
-  <canvas id="chart-pendientes"></canvas>
+<div class="chart-scroll">
+  <div class="chart-wrap" style="height:476px">
+    <canvas id="chart-pendientes"></canvas>
+  </div>
 </div>
 <script>
 new Chart(document.getElementById('chart-pendientes'), {
   type: 'bar',
   data: {
-    labels: ["BURGOS FLORES JOHNNY FRANCISCO", "DONOSO MOGOLLON TANYA PAMELA", "SANDOYA LARA RICARDO ANDRES", "BUÑAY CAMBA DANIEL ALEXANDER", "CUENCA MARQUEZ CESAR ARTURO", "ECHEVERRIA MAGGI EDDIE EFRÉN", "CALI PROAÑO ANGELA FRANCISCA", "BREVI MARTINEZ VALENTINA", "MURILLO ALAVA PEDRO FABRICIO", "SEIS MENDOZA LUIS AMANDO", "MUÑOZ SALAZAR FRANS JHASMANY", "ROMERO JARA MARIA ISABEL", "MOLINA VASQUEZ FELIPE ANDRES", "MORALES VERGARA IVETHEYAMEL", "LOZANO LEIVA ANDREA NATALIA", "BRIONES MACIAS JUAN CARLOS", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "LUPERA MARTINEZ MARIA DEL PILAR", "TORRES RUILOVA BISMARK OSMANY", "CAMPOVERDE TABARA LAURA MARIEN", "BUSTAMANTE ALARCON WILLIAN FELIPE", "YEPEZ QUINTANA MARIO WILLIAM", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "ALMEIDA CHICAIZA BYRON SEBASTIAN", "SALVADOR MINUCHE MARIA ANDREA", "SUCO VALLE CARLOS ANDRES", "CAMPOVERDE RIVERA CINDY ESTHER", "ORTEGA ASTUDILLO ROSA LETICIA", "VIDAL PIZARRO KATHERINE CUMANDA", "HIDALGO SILVA DAVID GONZALO", "VEGA VERDUGA JORGE ALBERTO", "GUERRERO FERRECCIO CARLOS AUGUSTO", "AGUIRRE DELEG JOSE ANDRES"],
+    labels: ["ARAUZ VILLAFUERTE JOFFRE FABIAN", "BREVI MARTINEZ VALENTINA", "CALI PROAÑO ANGELA FRANCISCA", "CUENCA MARQUEZ CESAR ARTURO", "LOZANO LEIVA ANDREA NATALIA", "ECHEVERRIA MAGGI EDDIE EFRÉN", "MURILLO ALAVA PEDRO FABRICIO", "MOLINA VASQUEZ FELIPE ANDRES", "SEIS MENDOZA LUIS AMANDO", "ROMERO JARA MARIA ISABEL", "MUÑOZ SALAZAR FRANS JHASMANY", "BUSTAMANTE ALARCON WILLIAN FELIPE", "TORRES RUILOVA BISMARK OSMANY", "YEPEZ QUINTANA MARIO WILLIAM", "SALVADOR MINUCHE MARIA ANDREA", "HIDALGO SILVA DAVID GONZALO", "VEGA VERDUGA JORGE ALBERTO"],
     datasets: [{
       label: 'Estudiantes sin asistencia',
-      data: [1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 6],
+      data: [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 4, 4, 5],
       backgroundColor: '#dc2626',
       borderColor: '#991b1b',
       borderWidth: 1,
@@ -87,7 +111,7 @@ new Chart(document.getElementById('chart-pendientes'), {
     scales: {
       x: { beginAtZero: true, ticks: { stepSize: 1 },
              title: { display: true, text: 'Numero de estudiantes pendientes' } },
-      y: { ticks: { font: { size: 11 } } }
+      y: { ticks: { font: { size: 11 }, callback: compactLabel } }
     }
   },
   plugins: [ChartDataLabels]
@@ -96,19 +120,21 @@ new Chart(document.getElementById('chart-pendientes'), {
 </section>
 <section id="retraso">
 <h2>Docentes con avance inferior a la semana 7
-  <span class="badge badge-warn">17 docentes</span>
+  <span class="badge badge-warn">13 docentes</span>
 </h2>
-<div class="chart-wrap" style="height:476px">
-  <canvas id="chart-retraso"></canvas>
+<div class="chart-scroll">
+  <div class="chart-wrap" style="height:400px">
+    <canvas id="chart-retraso"></canvas>
+  </div>
 </div>
 <script>
 new Chart(document.getElementById('chart-retraso'), {
   type: 'bar',
   data: {
-    labels: ["DELGADO CRUZ AIMEE DEL ROCÍO", "FLORES BELTRAN PATRICIA KATHERINE", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "LOMAS FRANCO MIRIAM ELIZABETH", "VELEZ ASPIAZU EVA ESTHER", "SAAVEDRA ROBLES LILEANA CAROLINA", "PEREZ MATO DAISY DE LA CARIDAD", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "MARIN SANTAMARIA MALENA PIERINA", "TORRES DEL SALTO ROMMY ADELFA", "MORA ALVARADO ENRIQUE ALEJANDRO", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "MANZABA CARVAJAL GHYSLAINE ROMINA", "CHARA MOREIRA PEDRO NAPOLEÓN", "TORRES ESPINOZA JUAN CARLOS", "DELGADO BOHORQUEZ ALINA ALEXANDRA"],
+    labels: ["FLORES BELTRAN PATRICIA KATHERINE", "MARIN SANTAMARIA MALENA PIERINA", "BURGOS FLORES JOHNNY FRANCISCO", "DELGADO CRUZ AIMEE DEL ROCÍO", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "TORRES DEL SALTO ROMMY ADELFA", "MORA ALVARADO ENRIQUE ALEJANDRO", "VELEZ ASPIAZU EVA ESTHER", "BUÑAY CAMBA DANIEL ALEXANDER", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "MANZABA CARVAJAL GHYSLAINE ROMINA", "TORRES ESPINOZA JUAN CARLOS", "VIDAL PIZARRO KATHERINE CUMANDA"],
     datasets: [{
       label: 'Ultima semana registrada',
-      data: [3.0, 4.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 6.0, 6.0, 6.0, 6.0, 6.0],
+      data: [4.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 6.0, 6.0, 6.0, 6.0, 6.5],
       backgroundColor: '#f97316',
       borderColor: '#c2410c',
       borderWidth: 1,
@@ -140,7 +166,7 @@ new Chart(document.getElementById('chart-retraso'), {
     scales: {
       x: { beginAtZero: true, max: 8,
              title: { display: true, text: 'Promedio de semanas registradas' } },
-      y: { ticks: { font: { size: 11 } } }
+      y: { ticks: { font: { size: 11 }, callback: compactLabel } }
     }
   },
   plugins: [ChartDataLabels, ChartAnnotation]
@@ -149,19 +175,23 @@ new Chart(document.getElementById('chart-retraso'), {
 </section>
 <section id="baja">
 <h2>Baja asistencia (&lt;70%)
-  <span class="badge badge-danger">145 estudiantes</span>
+  <span class="badge badge-danger">197 estudiantes</span>
 </h2>
 <div class="two-col">
   <div>
     <h3>Tutores con mayor cantidad de estudiantes criticos</h3>
-    <div class="chart-wrap" style="height:588px">
-      <canvas id="chart-baja-tutor"></canvas>
+    <div class="chart-scroll">
+      <div class="chart-wrap" style="height:1036px">
+        <canvas id="chart-baja-tutor"></canvas>
+      </div>
     </div>
   </div>
   <div>
     <h3>Distribucion de porcentajes de asistencia</h3>
-    <div class="chart-wrap" style="height:588px">
-      <canvas id="chart-dist"></canvas>
+    <div class="chart-scroll">
+      <div class="chart-wrap" style="height:1036px">
+        <canvas id="chart-dist"></canvas>
+      </div>
     </div>
   </div>
 </div>
@@ -169,10 +199,10 @@ new Chart(document.getElementById('chart-retraso'), {
 new Chart(document.getElementById('chart-baja-tutor'), {
   type: 'bar',
   data: {
-    labels: ["FORERO FUENTES BORIS ANDREI", "SAAVEDRA ROBLES LILEANA CAROLINA", "DELGADO CRUZ AIMEE DEL ROCÍO", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "LOMAS FRANCO MIRIAM ELIZABETH", "FLORES BELTRAN PATRICIA KATHERINE", "LUDEÑA ZERDA JORGE FRANKLIN", "DELGADO BOHORQUEZ ALINA ALEXANDRA", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "MANZABA CARVAJAL GHYSLAINE ROMINA", "PALACIOS PORTES CARLOS", "MARIN SANTAMARIA MALENA PIERINA", "VELEZ ASPIAZU EVA ESTHER", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "MORA ALVARADO ENRIQUE ALEJANDRO", "TORRES ESPINOZA JUAN CARLOS", "TORRES DEL SALTO ROMMY ADELFA", "CHARA MOREIRA PEDRO NAPOLEÓN", "PEREZ MATO DAISY DE LA CARIDAD", "VALENCIA ROBLES RICARDO ANDRES"],
+    labels: ["BURGOS FLORES JOHNNY FRANCISCO", "FORERO FUENTES BORIS ANDREI", "DONOSO MOGOLLON TANYA PAMELA", "SAAVEDRA ROBLES LILEANA CAROLINA", "DELGADO BOHORQUEZ ALINA ALEXANDRA", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "DELGADO CRUZ AIMEE DEL ROCÍO", "BUÑAY CAMBA DANIEL ALEXANDER", "MARIN SANTAMARIA MALENA PIERINA", "PALACIOS PORTES CARLOS", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "MORALES VERGARA IVETHEYAMEL", "LUDEÑA ZERDA JORGE FRANKLIN", "MANZABA CARVAJAL GHYSLAINE ROMINA", "LOMAS FRANCO MIRIAM ELIZABETH", "FLORES BELTRAN PATRICIA KATHERINE", "VELEZ ASPIAZU EVA ESTHER", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "MORA ALVARADO ENRIQUE ALEJANDRO", "BRIONES MACIAS JUAN CARLOS", "CAMPOVERDE TABARA LAURA MARIEN", "LUPERA MARTINEZ MARIA DEL PILAR", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "TORRES ESPINOZA JUAN CARLOS", "ORTEGA ASTUDILLO ROSA LETICIA", "ALMEIDA CHICAIZA BYRON SEBASTIAN", "VIDAL PIZARRO KATHERINE CUMANDA", "SUCO VALLE CARLOS ANDRES", "CAMPOVERDE RIVERA CINDY ESTHER", "GUERRERO FERRECCIO CARLOS AUGUSTO", "TORRES DEL SALTO ROMMY ADELFA", "AGUIRRE DELEG JOSE ANDRES", "CHARA MOREIRA PEDRO NAPOLEÓN", "PEREZ MATO DAISY DE LA CARIDAD", "VALENCIA ROBLES RICARDO ANDRES"],
     datasets: [{
       label: 'Estudiantes <70%',
-      data: [1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 5, 16, 33, 56],
+      data: [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 6, 16, 33, 56],
       backgroundColor: '#ea580c',
       borderColor: '#9a3412',
       borderWidth: 1,
@@ -192,7 +222,7 @@ new Chart(document.getElementById('chart-baja-tutor'), {
     scales: {
       x: { beginAtZero: true, ticks: { stepSize: 1 },
              title: { display: true, text: 'Numero de estudiantes' } },
-      y: { ticks: { font: { size: 10 } } }
+      y: { ticks: { font: { size: 10 }, callback: compactLabel } }
     }
   },
   plugins: [ChartDataLabels]
@@ -204,7 +234,7 @@ new Chart(document.getElementById('chart-dist'), {
     labels: ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "70-80", "80-90", "90-100"],
     datasets: [{
       label: 'Estudiantes',
-      data: [0, 6, 22, 68, 47, 2, 0, 0, 0, 0],
+      data: [0, 2, 3, 72, 112, 8, 0, 0, 0, 0],
       backgroundColor: ctx => {
         const i = ctx.dataIndex;
         if (i < 7) return '#dc2626';
@@ -236,8 +266,10 @@ new Chart(document.getElementById('chart-dist'), {
 </section>
 <section id="notas"><h2>Estado de notas</h2><div class="subsec">
   <h3>Nota Tutor <span class='badge badge-warn'>138 sin nota</span></h3>
-  <div class="chart-wrap" style="height:1352px">
-    <canvas id="chart-nota-tutor"></canvas>
+  <div class="chart-scroll">
+    <div class="chart-wrap" style="height:1352px">
+      <canvas id="chart-nota-tutor"></canvas>
+    </div>
   </div>
   <script>
   new Chart(document.getElementById('chart-nota-tutor'), {
@@ -268,7 +300,7 @@ new Chart(document.getElementById('chart-dist'), {
       },
       scales: {
         x: { stacked: true, title: { display: true, text: 'Cantidad de estudiantes' } },
-        y: { stacked: true, ticks: { font: { size: 10 } } }
+        y: { stacked: true, ticks: { font: { size: 10 }, callback: compactLabel } }
       }
     },
     plugins: [ChartDataLabels]
@@ -276,8 +308,10 @@ new Chart(document.getElementById('chart-dist'), {
   </script>
 </div><div class="subsec">
   <h3>Nota Revisor <span class='badge badge-warn'>0 sin nota</span></h3>
-  <div class="chart-wrap" style="height:400px">
-    <canvas id="chart-nota-rev"></canvas>
+  <div class="chart-scroll">
+    <div class="chart-wrap" style="height:400px">
+      <canvas id="chart-nota-rev"></canvas>
+    </div>
   </div>
   <script>
   new Chart(document.getElementById('chart-nota-rev'), {
@@ -308,13 +342,574 @@ new Chart(document.getElementById('chart-dist'), {
       },
       scales: {
         x: { stacked: true, title: { display: true, text: 'Cantidad de estudiantes' } },
-        y: { stacked: true, ticks: { font: { size: 10 } } }
+        y: { stacked: true, ticks: { font: { size: 10 }, callback: compactLabel } }
       }
     },
     plugins: [ChartDataLabels]
   });
   </script>
-</div></section></main>
+</div></section></div>
+<div class="dashboard-panel" data-scope="c1" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">28</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">9</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">32% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">19</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">68% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">19</div><div class="kpi-label">Asistencia en riesgo &lt;80%</div><div class="kpi-sub">68% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">7</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<section id="pendientes">
+<h2>Tutores con asistencia pendiente
+  <span class="badge badge-danger">6 tutores &middot; 9 estudiantes</span>
+</h2>
+<div class="chart-scroll">
+  <div class="chart-wrap" style="height:400px">
+    <canvas id="chart-pendientes-c1"></canvas>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('chart-pendientes-c1'), {
+  type: 'bar',
+  data: {
+    labels: ["ARAUZ VILLAFUERTE JOFFRE FABIAN", "BUSTAMANTE ALARCON WILLIAN FELIPE", "TORRES RUILOVA BISMARK OSMANY", "LOZANO LEIVA ANDREA NATALIA", "MUÑOZ SALAZAR FRANS JHASMANY", "SEIS MENDOZA LUIS AMANDO"],
+    datasets: [{
+      label: 'Estudiantes sin asistencia',
+      data: [1, 1, 1, 2, 2, 2],
+      backgroundColor: '#dc2626',
+      borderColor: '#991b1b',
+      borderWidth: 1,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        color: '#1e293b', font: { weight: 'bold', size: 12 },
+        formatter: v => v
+      }
+    },
+    scales: {
+      x: { beginAtZero: true, ticks: { stepSize: 1 },
+             title: { display: true, text: 'Numero de estudiantes pendientes' } },
+      y: { ticks: { font: { size: 11 }, callback: compactLabel } }
+    }
+  },
+  plugins: [ChartDataLabels]
+});
+</script>
+</section>
+<section id="retraso">
+<h2>Docentes con avance inferior a la semana 7
+  <span class="badge badge-warn">2 docentes</span>
+</h2>
+<div class="chart-scroll">
+  <div class="chart-wrap" style="height:400px">
+    <canvas id="chart-retraso-c1"></canvas>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('chart-retraso-c1'), {
+  type: 'bar',
+  data: {
+    labels: ["DELGADO CRUZ AIMEE DEL ROCÍO", "MORA ALVARADO ENRIQUE ALEJANDRO"],
+    datasets: [{
+      label: 'Ultima semana registrada',
+      data: [5.0, 5.0],
+      backgroundColor: '#f97316',
+      borderColor: '#c2410c',
+      borderWidth: 1,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        color: '#1e293b', font: { weight: 'bold', size: 12 },
+        formatter: v => v
+      },
+      annotation: {
+        annotations: {
+          lineaSemana: {
+            type: 'line', scaleID: 'x', value: 7,
+            borderColor: '#dc2626', borderWidth: 2, borderDash: [6,4],
+            label: { display: true, content: 'Semana actual: 7',
+                      position: 'end', color: '#dc2626', font: { size: 11 } }
+          }
+        }
+      }
+    },
+    scales: {
+      x: { beginAtZero: true, max: 8,
+             title: { display: true, text: 'Promedio de semanas registradas' } },
+      y: { ticks: { font: { size: 11 }, callback: compactLabel } }
+    }
+  },
+  plugins: [ChartDataLabels, ChartAnnotation]
+});
+</script>
+</section>
+<section id="baja">
+<h2>Baja asistencia (&lt;70%)
+  <span class="badge badge-danger">19 estudiantes</span>
+</h2>
+<div class="two-col">
+  <div>
+    <h3>Tutores con mayor cantidad de estudiantes criticos</h3>
+    <div class="chart-scroll">
+      <div class="chart-wrap" style="height:300px">
+        <canvas id="chart-baja-tutor-c1"></canvas>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h3>Distribucion de porcentajes de asistencia</h3>
+    <div class="chart-scroll">
+      <div class="chart-wrap" style="height:300px">
+        <canvas id="chart-dist-c1"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('chart-baja-tutor-c1'), {
+  type: 'bar',
+  data: {
+    labels: ["DELGADO CRUZ AIMEE DEL ROCÍO", "MORA ALVARADO ENRIQUE ALEJANDRO", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "LUDEÑA ZERDA JORGE FRANKLIN", "CHARA MOREIRA PEDRO NAPOLEÓN"],
+    datasets: [{
+      label: 'Estudiantes <70%',
+      data: [1, 1, 1, 2, 14],
+      backgroundColor: '#ea580c',
+      borderColor: '#9a3412',
+      borderWidth: 1,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        color: '#1e293b', font: { weight: 'bold', size: 11 },
+        formatter: v => v
+      }
+    },
+    scales: {
+      x: { beginAtZero: true, ticks: { stepSize: 1 },
+             title: { display: true, text: 'Numero de estudiantes' } },
+      y: { ticks: { font: { size: 10 }, callback: compactLabel } }
+    }
+  },
+  plugins: [ChartDataLabels]
+});
+
+new Chart(document.getElementById('chart-dist-c1'), {
+  type: 'bar',
+  data: {
+    labels: ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "70-80", "80-90", "90-100"],
+    datasets: [{
+      label: 'Estudiantes',
+      data: [0, 1, 0, 4, 12, 2, 0, 0, 0, 0],
+      backgroundColor: ctx => {
+        const i = ctx.dataIndex;
+        if (i < 7) return '#dc2626';
+        if (i < 8) return '#f97316';
+        return '#16a34a';
+      },
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        display: ctx => ctx.dataset.data[ctx.dataIndex] > 0,
+        anchor: 'end', align: 'end',
+        color: '#1e293b', font: { weight: 'bold', size: 11 },
+        formatter: v => v
+      }
+    },
+    scales: {
+      x: { title: { display: true, text: '% Asistencia' } },
+      y: { beginAtZero: true, title: { display: true, text: 'Estudiantes' } }
+    }
+  },
+  plugins: [ChartDataLabels]
+});
+</script>
+</section>
+<section id="notas"><h2>Estado de notas</h2><div class="subsec">
+  <h3>Nota Tutor <span class='badge badge-warn'>14 sin nota</span></h3>
+  <div class="chart-scroll">
+    <div class="chart-wrap" style="height:400px">
+      <canvas id="chart-nota-tutor-c1"></canvas>
+    </div>
+  </div>
+  <script>
+  new Chart(document.getElementById('chart-nota-tutor-c1'), {
+    type: 'bar',
+    data: {
+      labels: ["MUÑOZ SALAZAR FRANS JHASMANY", "SEIS MENDOZA LUIS AMANDO", "LOZANO LEIVA ANDREA NATALIA", "LUDEÑA ZERDA JORGE FRANKLIN", "BUSTAMANTE ALARCON WILLIAN FELIPE", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "TORRES RUILOVA BISMARK OSMANY", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "MORA ALVARADO ENRIQUE ALEJANDRO", "DELGADO CRUZ AIMEE DEL ROCÍO"],
+      datasets: [
+        { label: 'Sin Nota', data: [2, 2, 2, 2, 1, 1, 1, 1, 1, 1],
+           backgroundColor: '#dc2626', borderRadius: 2 },
+        { label: 'Aprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           backgroundColor: '#16a34a', borderRadius: 2 },
+        { label: 'Reprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           backgroundColor: '#2563eb', borderRadius: 2 },
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top' },
+        datalabels: {
+          display: ctx => ctx.dataset.data[ctx.dataIndex] > 0,
+          anchor: 'center', align: 'center',
+          color: '#fff', font: { size: 10, weight: 'bold' },
+          formatter: v => v
+        }
+      },
+      scales: {
+        x: { stacked: true, title: { display: true, text: 'Cantidad de estudiantes' } },
+        y: { stacked: true, ticks: { font: { size: 10 }, callback: compactLabel } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+  </script>
+</div><div class="subsec">
+  <h3>Nota Revisor <span class='badge badge-warn'>0 sin nota</span></h3>
+  <div class="chart-scroll">
+    <div class="chart-wrap" style="height:400px">
+      <canvas id="chart-nota-rev-c1"></canvas>
+    </div>
+  </div>
+  <script>
+  new Chart(document.getElementById('chart-nota-rev-c1'), {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [
+        { label: 'Sin Nota', data: [],
+           backgroundColor: '#dc2626', borderRadius: 2 },
+        { label: 'Aprobatoria', data: [],
+           backgroundColor: '#16a34a', borderRadius: 2 },
+        { label: 'Reprobatoria', data: [],
+           backgroundColor: '#2563eb', borderRadius: 2 },
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top' },
+        datalabels: {
+          display: ctx => ctx.dataset.data[ctx.dataIndex] > 0,
+          anchor: 'center', align: 'center',
+          color: '#fff', font: { size: 10, weight: 'bold' },
+          formatter: v => v
+        }
+      },
+      scales: {
+        x: { stacked: true, title: { display: true, text: 'Cantidad de estudiantes' } },
+        y: { stacked: true, ticks: { font: { size: 10 }, callback: compactLabel } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+  </script>
+</div></section></div>
+<div class="dashboard-panel" data-scope="c2" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">248</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">69</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">28% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">178</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">72% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">178</div><div class="kpi-label">Asistencia en riesgo &lt;80%</div><div class="kpi-sub">72% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">7</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<section id="pendientes">
+<h2>Tutores con asistencia pendiente
+  <span class="badge badge-danger">13 tutores &middot; 69 estudiantes</span>
+</h2>
+<div class="chart-scroll">
+  <div class="chart-wrap" style="height:400px">
+    <canvas id="chart-pendientes-c2"></canvas>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('chart-pendientes-c2'), {
+  type: 'bar',
+  data: {
+    labels: ["BREVI MARTINEZ VALENTINA", "BUSTAMANTE ALARCON WILLIAN FELIPE", "CALI PROAÑO ANGELA FRANCISCA", "CUENCA MARQUEZ CESAR ARTURO", "ECHEVERRIA MAGGI EDDIE EFRÉN", "MOLINA VASQUEZ FELIPE ANDRES", "MURILLO ALAVA PEDRO FABRICIO", "ROMERO JARA MARIA ISABEL", "TORRES RUILOVA BISMARK OSMANY", "YEPEZ QUINTANA MARIO WILLIAM", "HIDALGO SILVA DAVID GONZALO", "SALVADOR MINUCHE MARIA ANDREA", "VEGA VERDUGA JORGE ALBERTO"],
+    datasets: [{
+      label: 'Estudiantes sin asistencia',
+      data: [2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 4, 4, 5],
+      backgroundColor: '#dc2626',
+      borderColor: '#991b1b',
+      borderWidth: 1,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        color: '#1e293b', font: { weight: 'bold', size: 12 },
+        formatter: v => v
+      }
+    },
+    scales: {
+      x: { beginAtZero: true, ticks: { stepSize: 1 },
+             title: { display: true, text: 'Numero de estudiantes pendientes' } },
+      y: { ticks: { font: { size: 11 }, callback: compactLabel } }
+    }
+  },
+  plugins: [ChartDataLabels]
+});
+</script>
+</section>
+<section id="retraso">
+<h2>Docentes con avance inferior a la semana 7
+  <span class="badge badge-warn">13 docentes</span>
+</h2>
+<div class="chart-scroll">
+  <div class="chart-wrap" style="height:400px">
+    <canvas id="chart-retraso-c2"></canvas>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('chart-retraso-c2'), {
+  type: 'bar',
+  data: {
+    labels: ["FLORES BELTRAN PATRICIA KATHERINE", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "BURGOS FLORES JOHNNY FRANCISCO", "DELGADO CRUZ AIMEE DEL ROCÍO", "TORRES DEL SALTO ROMMY ADELFA", "VELEZ ASPIAZU EVA ESTHER", "MARIN SANTAMARIA MALENA PIERINA", "MORA ALVARADO ENRIQUE ALEJANDRO", "TORRES ESPINOZA JUAN CARLOS", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "BUÑAY CAMBA DANIEL ALEXANDER", "MANZABA CARVAJAL GHYSLAINE ROMINA", "VIDAL PIZARRO KATHERINE CUMANDA"],
+    datasets: [{
+      label: 'Ultima semana registrada',
+      data: [4.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 6.0, 6.0, 6.0, 6.0, 6.5],
+      backgroundColor: '#f97316',
+      borderColor: '#c2410c',
+      borderWidth: 1,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        color: '#1e293b', font: { weight: 'bold', size: 12 },
+        formatter: v => v
+      },
+      annotation: {
+        annotations: {
+          lineaSemana: {
+            type: 'line', scaleID: 'x', value: 7,
+            borderColor: '#dc2626', borderWidth: 2, borderDash: [6,4],
+            label: { display: true, content: 'Semana actual: 7',
+                      position: 'end', color: '#dc2626', font: { size: 11 } }
+          }
+        }
+      }
+    },
+    scales: {
+      x: { beginAtZero: true, max: 8,
+             title: { display: true, text: 'Promedio de semanas registradas' } },
+      y: { ticks: { font: { size: 11 }, callback: compactLabel } }
+    }
+  },
+  plugins: [ChartDataLabels, ChartAnnotation]
+});
+</script>
+</section>
+<section id="baja">
+<h2>Baja asistencia (&lt;70%)
+  <span class="badge badge-danger">178 estudiantes</span>
+</h2>
+<div class="two-col">
+  <div>
+    <h3>Tutores con mayor cantidad de estudiantes criticos</h3>
+    <div class="chart-scroll">
+      <div class="chart-wrap" style="height:1008px">
+        <canvas id="chart-baja-tutor-c2"></canvas>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h3>Distribucion de porcentajes de asistencia</h3>
+    <div class="chart-scroll">
+      <div class="chart-wrap" style="height:1008px">
+        <canvas id="chart-dist-c2"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('chart-baja-tutor-c2'), {
+  type: 'bar',
+  data: {
+    labels: ["BURGOS FLORES JOHNNY FRANCISCO", "FORERO FUENTES BORIS ANDREI", "DONOSO MOGOLLON TANYA PAMELA", "DELGADO CRUZ AIMEE DEL ROCÍO", "SAAVEDRA ROBLES LILEANA CAROLINA", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "CHARA MOREIRA PEDRO NAPOLEÓN", "BUÑAY CAMBA DANIEL ALEXANDER", "FLORES BELTRAN PATRICIA KATHERINE", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "MORALES VERGARA IVETHEYAMEL", "PALACIOS PORTES CARLOS", "MANZABA CARVAJAL GHYSLAINE ROMINA", "MARIN SANTAMARIA MALENA PIERINA", "LOMAS FRANCO MIRIAM ELIZABETH", "DELGADO BOHORQUEZ ALINA ALEXANDRA", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "MORA ALVARADO ENRIQUE ALEJANDRO", "VELEZ ASPIAZU EVA ESTHER", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "CAMPOVERDE TABARA LAURA MARIEN", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "TORRES ESPINOZA JUAN CARLOS", "LUPERA MARTINEZ MARIA DEL PILAR", "BRIONES MACIAS JUAN CARLOS", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "ORTEGA ASTUDILLO ROSA LETICIA", "SUCO VALLE CARLOS ANDRES", "CAMPOVERDE RIVERA CINDY ESTHER", "VIDAL PIZARRO KATHERINE CUMANDA", "ALMEIDA CHICAIZA BYRON SEBASTIAN", "TORRES DEL SALTO ROMMY ADELFA", "GUERRERO FERRECCIO CARLOS AUGUSTO", "AGUIRRE DELEG JOSE ANDRES", "PEREZ MATO DAISY DE LA CARIDAD", "VALENCIA ROBLES RICARDO ANDRES"],
+    datasets: [{
+      label: 'Estudiantes <70%',
+      data: [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 6, 33, 56],
+      backgroundColor: '#ea580c',
+      borderColor: '#9a3412',
+      borderWidth: 1,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        color: '#1e293b', font: { weight: 'bold', size: 11 },
+        formatter: v => v
+      }
+    },
+    scales: {
+      x: { beginAtZero: true, ticks: { stepSize: 1 },
+             title: { display: true, text: 'Numero de estudiantes' } },
+      y: { ticks: { font: { size: 10 }, callback: compactLabel } }
+    }
+  },
+  plugins: [ChartDataLabels]
+});
+
+new Chart(document.getElementById('chart-dist-c2'), {
+  type: 'bar',
+  data: {
+    labels: ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "70-80", "80-90", "90-100"],
+    datasets: [{
+      label: 'Estudiantes',
+      data: [0, 1, 3, 68, 100, 6, 0, 0, 0, 0],
+      backgroundColor: ctx => {
+        const i = ctx.dataIndex;
+        if (i < 7) return '#dc2626';
+        if (i < 8) return '#f97316';
+        return '#16a34a';
+      },
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        display: ctx => ctx.dataset.data[ctx.dataIndex] > 0,
+        anchor: 'end', align: 'end',
+        color: '#1e293b', font: { weight: 'bold', size: 11 },
+        formatter: v => v
+      }
+    },
+    scales: {
+      x: { title: { display: true, text: '% Asistencia' } },
+      y: { beginAtZero: true, title: { display: true, text: 'Estudiantes' } }
+    }
+  },
+  plugins: [ChartDataLabels]
+});
+</script>
+</section>
+<section id="notas"><h2>Estado de notas</h2><div class="subsec">
+  <h3>Nota Tutor <span class='badge badge-warn'>124 sin nota</span></h3>
+  <div class="chart-scroll">
+    <div class="chart-wrap" style="height:1248px">
+      <canvas id="chart-nota-tutor-c2"></canvas>
+    </div>
+  </div>
+  <script>
+  new Chart(document.getElementById('chart-nota-tutor-c2'), {
+    type: 'bar',
+    data: {
+      labels: ["AGUIRRE DELEG JOSE ANDRES", "VEGA VERDUGA JORGE ALBERTO", "TORRES DEL SALTO ROMMY ADELFA", "GUERRERO FERRECCIO CARLOS AUGUSTO", "CAMPOVERDE RIVERA CINDY ESTHER", "ORTEGA ASTUDILLO ROSA LETICIA", "ALMEIDA CHICAIZA BYRON SEBASTIAN", "SALVADOR MINUCHE MARIA ANDREA", "SUCO VALLE CARLOS ANDRES", "VIDAL PIZARRO KATHERINE CUMANDA", "HIDALGO SILVA DAVID GONZALO", "YEPEZ QUINTANA MARIO WILLIAM", "BRIONES MACIAS JUAN CARLOS", "TORRES ESPINOZA JUAN CARLOS", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "CAMPOVERDE TABARA LAURA MARIEN", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "LUPERA MARTINEZ MARIA DEL PILAR", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "TORRES RUILOVA BISMARK OSMANY", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "BREVI MARTINEZ VALENTINA", "BUSTAMANTE ALARCON WILLIAN FELIPE", "CUENCA MARQUEZ CESAR ARTURO", "DELGADO BOHORQUEZ ALINA ALEXANDRA", "MOLINA VASQUEZ FELIPE ANDRES", "LOMAS FRANCO MIRIAM ELIZABETH", "FLORES BELTRAN PATRICIA KATHERINE", "ECHEVERRIA MAGGI EDDIE EFRÉN", "CHARA MOREIRA PEDRO NAPOLEÓN", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "MORA ALVARADO ENRIQUE ALEJANDRO", "PALACIOS PORTES CARLOS", "MANZABA CARVAJAL GHYSLAINE ROMINA", "MARIN SANTAMARIA MALENA PIERINA", "MURILLO ALAVA PEDRO FABRICIO", "MORALES VERGARA IVETHEYAMEL", "VELEZ ASPIAZU EVA ESTHER", "ROMERO JARA MARIA ISABEL", "CALI PROAÑO ANGELA FRANCISCA", "BUÑAY CAMBA DANIEL ALEXANDER", "DONOSO MOGOLLON TANYA PAMELA", "FORERO FUENTES BORIS ANDREI", "SAAVEDRA ROBLES LILEANA CAROLINA", "SANDOYA LARA RICARDO ANDRES", "BURGOS FLORES JOHNNY FRANCISCO", "DELGADO CRUZ AIMEE DEL ROCÍO"],
+      datasets: [
+        { label: 'Sin Nota', data: [6, 5, 5, 5, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1],
+           backgroundColor: '#dc2626', borderRadius: 2 },
+        { label: 'Aprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           backgroundColor: '#16a34a', borderRadius: 2 },
+        { label: 'Reprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+           backgroundColor: '#2563eb', borderRadius: 2 },
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top' },
+        datalabels: {
+          display: ctx => ctx.dataset.data[ctx.dataIndex] > 0,
+          anchor: 'center', align: 'center',
+          color: '#fff', font: { size: 10, weight: 'bold' },
+          formatter: v => v
+        }
+      },
+      scales: {
+        x: { stacked: true, title: { display: true, text: 'Cantidad de estudiantes' } },
+        y: { stacked: true, ticks: { font: { size: 10 }, callback: compactLabel } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+  </script>
+</div><div class="subsec">
+  <h3>Nota Revisor <span class='badge badge-warn'>0 sin nota</span></h3>
+  <div class="chart-scroll">
+    <div class="chart-wrap" style="height:400px">
+      <canvas id="chart-nota-rev-c2"></canvas>
+    </div>
+  </div>
+  <script>
+  new Chart(document.getElementById('chart-nota-rev-c2'), {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [
+        { label: 'Sin Nota', data: [],
+           backgroundColor: '#dc2626', borderRadius: 2 },
+        { label: 'Aprobatoria', data: [],
+           backgroundColor: '#16a34a', borderRadius: 2 },
+        { label: 'Reprobatoria', data: [],
+           backgroundColor: '#2563eb', borderRadius: 2 },
+      ]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top' },
+        datalabels: {
+          display: ctx => ctx.dataset.data[ctx.dataIndex] > 0,
+          anchor: 'center', align: 'center',
+          color: '#fff', font: { size: 10, weight: 'bold' },
+          formatter: v => v
+        }
+      },
+      scales: {
+        x: { stacked: true, title: { display: true, text: 'Cantidad de estudiantes' } },
+        y: { stacked: true, ticks: { font: { size: 10 }, callback: compactLabel } }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+  </script>
+</div></section></div></main>
 <footer>Generado automaticamente por 03_dashboard.py &middot; Claude Code</footer>
+<script>
+document.getElementById('filtro-carrera').addEventListener('change', event => {
+  document.querySelectorAll('.dashboard-panel').forEach(panel => {
+    panel.hidden = panel.dataset.scope !== event.target.value;
+  });
+});
+</script>
 </body>
 </html>
