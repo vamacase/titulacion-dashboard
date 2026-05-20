@@ -77,7 +77,7 @@ function compactLabel(value) {
 <body>
 <header>
   <h1>Dashboard Titulacion FAU-UG</h1>
-  <div class="meta">Periodo: 2026 - 2027 TI1 &nbsp;|&nbsp; Semana 8 &nbsp;|&nbsp; Actualizado: 20/05/2026 08:30</div>
+  <div class="meta">Periodo: 2026 - 2027 TI1 &nbsp;|&nbsp; Semana 8 &nbsp;|&nbsp; Actualizado: 20/05/2026 08:31</div>
 </header>
 <nav><a href="#kpis">Resumen</a><a href="#pendientes">Pendientes</a><a href="#retraso">Avance</a><a href="#baja">Baja asistencia</a><a href="#notas">Notas</a><a href="#retiros">Retiros</a></nav>
 <main><div class="filter-bar"><label for="filtro-carrera">Carrera</label><select id="filtro-carrera"><option value="todas">Todas las carreras</option><option value="c1">ARQUITECTURA (SEMESTRAL)</option><option value="c2">ARQUITECTURA-2018</option></select></div><div class="dashboard-panel" data-scope="todas"><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">136</div><div class="kpi-label">Estudiantes activos</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">0</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">2 solicitudes anuladas</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">55</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">40% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">132</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">97% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
@@ -365,8 +365,8 @@ new Chart(document.getElementById('chart-dist'), {
 </h2>
 <div class="table-scroll">
 <table class="retiros-table">
-  <thead><tr><th>Carrera</th><th>Periodo</th><th>Cedula</th><th>Estudiante</th><th>Fecha Retiro</th><th>Estado</th></tr></thead>
-  <tbody><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>953305299</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>ANULADA</td></tr><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>953305299</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>ANULADA</td></tr><tr class="ret-anulada"><td>ARQUITECTURA (SEMESTRAL)</td><td>2026 - 2027 TI1</td><td>930568720</td><td>TROYA QUIMI JORDY JOEL</td><td>29/04/26</td><td>ANULADA</td></tr></tbody>
+  <thead><tr><th>Carrera</th><th>Periodo</th><th>Cedula</th><th>Estudiante</th><th>Fecha Retiro</th><th># Orden</th><th>Estado</th></tr></thead>
+  <tbody><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>953305299</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>121400202601958</td><td>ANULADA</td></tr><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>953305299</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>121400202601959</td><td>ANULADA</td></tr><tr class="ret-anulada"><td>ARQUITECTURA (SEMESTRAL)</td><td>2026 - 2027 TI1</td><td>930568720</td><td>TROYA QUIMI JORDY JOEL</td><td>29/04/26</td><td>120100202600039</td><td>ANULADA</td></tr></tbody>
 </table>
 </div>
 <p class="hint">Los registros con estado "ANULADA" representan solicitudes de retiro canceladas: el estudiante sigue activo en el programa.</p>
@@ -656,8 +656,8 @@ new Chart(document.getElementById('chart-dist-c1'), {
 </h2>
 <div class="table-scroll">
 <table class="retiros-table">
-  <thead><tr><th>Carrera</th><th>Periodo</th><th>Cedula</th><th>Estudiante</th><th>Fecha Retiro</th><th>Estado</th></tr></thead>
-  <tbody><tr class="ret-anulada"><td>ARQUITECTURA (SEMESTRAL)</td><td>2026 - 2027 TI1</td><td>930568720</td><td>TROYA QUIMI JORDY JOEL</td><td>29/04/26</td><td>ANULADA</td></tr></tbody>
+  <thead><tr><th>Carrera</th><th>Periodo</th><th>Cedula</th><th>Estudiante</th><th>Fecha Retiro</th><th># Orden</th><th>Estado</th></tr></thead>
+  <tbody><tr class="ret-anulada"><td>ARQUITECTURA (SEMESTRAL)</td><td>2026 - 2027 TI1</td><td>930568720</td><td>TROYA QUIMI JORDY JOEL</td><td>29/04/26</td><td>120100202600039</td><td>ANULADA</td></tr></tbody>
 </table>
 </div>
 <p class="hint">Los registros con estado "ANULADA" representan solicitudes de retiro canceladas: el estudiante sigue activo en el programa.</p>
@@ -947,13 +947,13 @@ new Chart(document.getElementById('chart-dist-c2'), {
 </h2>
 <div class="table-scroll">
 <table class="retiros-table">
-  <thead><tr><th>Carrera</th><th>Periodo</th><th>Cedula</th><th>Estudiante</th><th>Fecha Retiro</th><th>Estado</th></tr></thead>
-  <tbody><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>953305299</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>ANULADA</td></tr><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>953305299</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>ANULADA</td></tr></tbody>
+  <thead><tr><th>Carrera</th><th>Periodo</th><th>Cedula</th><th>Estudiante</th><th>Fecha Retiro</th><th># Orden</th><th>Estado</th></tr></thead>
+  <tbody><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>953305299</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>121400202601958</td><td>ANULADA</td></tr><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>953305299</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>121400202601959</td><td>ANULADA</td></tr></tbody>
 </table>
 </div>
 <p class="hint">Los registros con estado "ANULADA" representan solicitudes de retiro canceladas: el estudiante sigue activo en el programa.</p>
 </section></div></main>
-<footer>Generado automaticamente &middot; FAU-UG &middot; Ultima actualizacion 20/05/2026 08:30</footer>
+<footer>Generado automaticamente &middot; FAU-UG &middot; Ultima actualizacion 20/05/2026 08:31</footer>
 <script>
 document.getElementById('filtro-carrera').addEventListener('change', event => {
   document.querySelectorAll('.dashboard-panel').forEach(panel => {
