@@ -49,6 +49,13 @@ section h3{font-size:.88rem;font-weight:600;color:#475569;margin-bottom:.6rem}
 }
 .ok{color:#16a34a;font-weight:600;padding:.5rem 0}
 .warn{color:#d97706}
+.hint{font-size:.75rem;color:#94a3b8;margin-top:.7rem;font-style:italic}
+.table-scroll{overflow-x:auto}
+.retiros-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.retiros-table th{background:var(--gray);color:var(--dark);font-weight:700;text-align:left;padding:.5rem .7rem;border-bottom:2px solid var(--border)}
+.retiros-table td{padding:.45rem .7rem;border-bottom:1px solid var(--border)}
+.retiros-table tr.ret-anulada td{color:#94a3b8;text-decoration:line-through}
+.retiros-table tr.ret-efectivo td{color:#1e293b;font-weight:500}
 footer{text-align:center;font-size:.75rem;color:#94a3b8;padding:2rem}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
@@ -70,10 +77,10 @@ function compactLabel(value) {
 <body>
 <header>
   <h1>Dashboard Titulacion FAU-UG</h1>
-  <div class="meta">Periodo: 2026 - 2027 TI1 &nbsp;|&nbsp; Semana 8 &nbsp;|&nbsp; Actualizado: 20/05/2026 07:35</div>
+  <div class="meta">Periodo: 2026 - 2027 TI1 &nbsp;|&nbsp; Semana 8 &nbsp;|&nbsp; Actualizado: 20/05/2026 08:29</div>
 </header>
-<nav><a href="#kpis">Resumen</a><a href="#pendientes">Pendientes</a><a href="#retraso">Avance</a><a href="#baja">Baja asistencia</a><a href="#notas">Notas</a></nav>
-<main><div class="filter-bar"><label for="filtro-carrera">Carrera</label><select id="filtro-carrera"><option value="todas">Todas las carreras</option><option value="c1">ARQUITECTURA (SEMESTRAL)</option><option value="c2">ARQUITECTURA-2018</option></select></div><div class="dashboard-panel" data-scope="todas"><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">136</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">55</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">40% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">132</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">97% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<nav><a href="#kpis">Resumen</a><a href="#pendientes">Pendientes</a><a href="#retraso">Avance</a><a href="#baja">Baja asistencia</a><a href="#notas">Notas</a><a href="#retiros">Retiros</a></nav>
+<main><div class="filter-bar"><label for="filtro-carrera">Carrera</label><select id="filtro-carrera"><option value="todas">Todas las carreras</option><option value="c1">ARQUITECTURA (SEMESTRAL)</option><option value="c2">ARQUITECTURA-2018</option></select></div><div class="dashboard-panel" data-scope="todas"><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">136</div><div class="kpi-label">Estudiantes activos</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">0</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">sobre 136 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">55</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">40% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">132</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">97% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes">
 <h2>Tutores con asistencia pendiente
   <span class="badge badge-danger">10 tutores &middot; 59 registros pendientes</span>
@@ -349,8 +356,22 @@ new Chart(document.getElementById('chart-dist'), {
     plugins: [ChartDataLabels]
   });
   </script>
-</div></section></div>
-<div class="dashboard-panel" data-scope="c1" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">14</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">8</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">57% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">14</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">100% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+</div></section>
+<section id="retiros">
+<h2>Retiros voluntarios
+  <span class="badge badge-warn">3 efectivos</span>
+  <span class="badge">0 anulados</span>
+  <span class="badge" style="background:#94a3b8">3 registros totales</span>
+</h2>
+<div class="table-scroll">
+<table class="retiros-table">
+  <thead><tr><th>Carrera</th><th>Periodo</th><th>Estudiante</th><th>Fecha Retiro</th><th># Orden</th><th>Estado</th></tr></thead>
+  <tbody><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>121400202601958</td><td>ANULADA</td></tr><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>121400202601959</td><td>ANULADA</td></tr><tr class="ret-anulada"><td>ARQUITECTURA (SEMESTRAL)</td><td>2026 - 2027 TI1</td><td>TROYA QUIMI JORDY JOEL</td><td>29/04/26</td><td>120100202600039</td><td>ANULADA</td></tr></tbody>
+</table>
+</div>
+<p class="hint">Los registros con estado "ANULADA" representan solicitudes de retiro canceladas: el estudiante sigue activo en el programa.</p>
+</section></div>
+<div class="dashboard-panel" data-scope="c1" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">14</div><div class="kpi-label">Estudiantes activos</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">0</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">sobre 14 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">8</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">57% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">14</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">100% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes">
 <h2>Tutores con asistencia pendiente
   <span class="badge badge-danger">5 tutores &middot; 8 registros pendientes</span>
@@ -626,8 +647,22 @@ new Chart(document.getElementById('chart-dist-c1'), {
     plugins: [ChartDataLabels]
   });
   </script>
-</div></section></div>
-<div class="dashboard-panel" data-scope="c2" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">122</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">47</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">39% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">118</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">97% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+</div></section>
+<section id="retiros">
+<h2>Retiros voluntarios
+  <span class="badge badge-warn">1 efectivos</span>
+  <span class="badge">0 anulados</span>
+  <span class="badge" style="background:#94a3b8">1 registros totales</span>
+</h2>
+<div class="table-scroll">
+<table class="retiros-table">
+  <thead><tr><th>Carrera</th><th>Periodo</th><th>Estudiante</th><th>Fecha Retiro</th><th># Orden</th><th>Estado</th></tr></thead>
+  <tbody><tr class="ret-anulada"><td>ARQUITECTURA (SEMESTRAL)</td><td>2026 - 2027 TI1</td><td>TROYA QUIMI JORDY JOEL</td><td>29/04/26</td><td>120100202600039</td><td>ANULADA</td></tr></tbody>
+</table>
+</div>
+<p class="hint">Los registros con estado "ANULADA" representan solicitudes de retiro canceladas: el estudiante sigue activo en el programa.</p>
+</section></div>
+<div class="dashboard-panel" data-scope="c2" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">122</div><div class="kpi-label">Estudiantes activos</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">0</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">sobre 122 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">47</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">39% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">118</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">97% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes">
 <h2>Tutores con asistencia pendiente
   <span class="badge badge-danger">7 tutores &middot; 51 registros pendientes</span>
@@ -903,8 +938,22 @@ new Chart(document.getElementById('chart-dist-c2'), {
     plugins: [ChartDataLabels]
   });
   </script>
-</div></section></div></main>
-<footer>Generado automaticamente &middot; FAU-UG &middot; Ultima actualizacion 20/05/2026 07:35</footer>
+</div></section>
+<section id="retiros">
+<h2>Retiros voluntarios
+  <span class="badge badge-warn">2 efectivos</span>
+  <span class="badge">0 anulados</span>
+  <span class="badge" style="background:#94a3b8">2 registros totales</span>
+</h2>
+<div class="table-scroll">
+<table class="retiros-table">
+  <thead><tr><th>Carrera</th><th>Periodo</th><th>Estudiante</th><th>Fecha Retiro</th><th># Orden</th><th>Estado</th></tr></thead>
+  <tbody><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>121400202601958</td><td>ANULADA</td></tr><tr class="ret-anulada"><td>ARQUITECTURA-2018</td><td>2026 - 2027 TI1</td><td>GOMEZ GUERRERO DANIELLA JAMILET</td><td>19/05/26</td><td>121400202601959</td><td>ANULADA</td></tr></tbody>
+</table>
+</div>
+<p class="hint">Los registros con estado "ANULADA" representan solicitudes de retiro canceladas: el estudiante sigue activo en el programa.</p>
+</section></div></main>
+<footer>Generado automaticamente &middot; FAU-UG &middot; Ultima actualizacion 20/05/2026 08:29</footer>
 <script>
 document.getElementById('filtro-carrera').addEventListener('change', event => {
   document.querySelectorAll('.dashboard-panel').forEach(panel => {
