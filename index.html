@@ -70,13 +70,13 @@ function compactLabel(value) {
 <body>
 <header>
   <h1>Dashboard Titulacion FAU-UG</h1>
-  <div class="meta">Periodo: 2026 - 2027 TI1 &nbsp;|&nbsp; Semana 8 &nbsp;|&nbsp; Actualizado: 20/05/2026 07:17</div>
+  <div class="meta">Periodo: 2026 - 2027 TI1 &nbsp;|&nbsp; Semana 8 &nbsp;|&nbsp; Actualizado: 20/05/2026 07:35</div>
 </header>
 <nav><a href="#kpis">Resumen</a><a href="#pendientes">Pendientes</a><a href="#retraso">Avance</a><a href="#baja">Baja asistencia</a><a href="#notas">Notas</a></nav>
-<main><div class="filter-bar"><label for="filtro-carrera">Carrera</label><select id="filtro-carrera"><option value="todas">Todas las carreras</option><option value="c1">ARQUITECTURA (SEMESTRAL)</option><option value="c2">ARQUITECTURA-2018</option></select></div><div class="dashboard-panel" data-scope="todas"><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">272</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">59</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">22% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">212</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">78% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<main><div class="filter-bar"><label for="filtro-carrera">Carrera</label><select id="filtro-carrera"><option value="todas">Todas las carreras</option><option value="c1">ARQUITECTURA (SEMESTRAL)</option><option value="c2">ARQUITECTURA-2018</option></select></div><div class="dashboard-panel" data-scope="todas"><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">136</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">55</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">40% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">132</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">97% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes">
 <h2>Tutores con asistencia pendiente
-  <span class="badge badge-danger">10 tutores &middot; 59 estudiantes</span>
+  <span class="badge badge-danger">10 tutores &middot; 59 registros pendientes</span>
 </h2>
 <div class="chart-scroll">
   <div class="chart-wrap" style="height:400px">
@@ -176,7 +176,7 @@ new Chart(document.getElementById('chart-retraso'), {
 </section>
 <section id="baja">
 <h2>Baja asistencia (&lt;70%)
-  <span class="badge badge-danger">212 estudiantes</span>
+  <span class="badge badge-danger">212 registros de tutoria</span>
 </h2>
 <div class="two-col">
   <div>
@@ -235,7 +235,7 @@ new Chart(document.getElementById('chart-dist'), {
     labels: ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "70-80", "80-90", "90-100"],
     datasets: [{
       label: 'Estudiantes',
-      data: [0, 2, 5, 69, 115, 21, 0, 0, 0, 0],
+      data: [0, 2, 5, 58, 61, 6, 0, 0, 0, 0],
       backgroundColor: ctx => {
         const i = ctx.dataIndex;
         if (i < 7) return '#dc2626';
@@ -350,10 +350,10 @@ new Chart(document.getElementById('chart-dist'), {
   });
   </script>
 </div></section></div>
-<div class="dashboard-panel" data-scope="c1" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">28</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">8</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">29% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">20</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">71% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<div class="dashboard-panel" data-scope="c1" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">14</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">8</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">57% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">14</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">100% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes">
 <h2>Tutores con asistencia pendiente
-  <span class="badge badge-danger">5 tutores &middot; 8 estudiantes</span>
+  <span class="badge badge-danger">5 tutores &middot; 8 registros pendientes</span>
 </h2>
 <div class="chart-scroll">
   <div class="chart-wrap" style="height:400px">
@@ -453,7 +453,7 @@ new Chart(document.getElementById('chart-retraso-c1'), {
 </section>
 <section id="baja">
 <h2>Baja asistencia (&lt;70%)
-  <span class="badge badge-danger">20 estudiantes</span>
+  <span class="badge badge-danger">20 registros de tutoria</span>
 </h2>
 <div class="two-col">
   <div>
@@ -512,7 +512,7 @@ new Chart(document.getElementById('chart-dist-c1'), {
     labels: ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "70-80", "80-90", "90-100"],
     datasets: [{
       label: 'Estudiantes',
-      data: [0, 1, 0, 5, 12, 2, 0, 0, 0, 0],
+      data: [0, 1, 0, 5, 8, 0, 0, 0, 0, 0],
       backgroundColor: ctx => {
         const i = ctx.dataIndex;
         if (i < 7) return '#dc2626';
@@ -627,10 +627,10 @@ new Chart(document.getElementById('chart-dist-c1'), {
   });
   </script>
 </div></section></div>
-<div class="dashboard-panel" data-scope="c2" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">244</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">51</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">21% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">192</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">79% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<div class="dashboard-panel" data-scope="c2" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">122</div><div class="kpi-label">Estudiantes totales</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">47</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">39% del total</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">118</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">97% del total</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% del total</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">8</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes">
 <h2>Tutores con asistencia pendiente
-  <span class="badge badge-danger">7 tutores &middot; 51 estudiantes</span>
+  <span class="badge badge-danger">7 tutores &middot; 51 registros pendientes</span>
 </h2>
 <div class="chart-scroll">
   <div class="chart-wrap" style="height:400px">
@@ -730,7 +730,7 @@ new Chart(document.getElementById('chart-retraso-c2'), {
 </section>
 <section id="baja">
 <h2>Baja asistencia (&lt;70%)
-  <span class="badge badge-danger">192 estudiantes</span>
+  <span class="badge badge-danger">192 registros de tutoria</span>
 </h2>
 <div class="two-col">
   <div>
@@ -789,7 +789,7 @@ new Chart(document.getElementById('chart-dist-c2'), {
     labels: ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "70-80", "80-90", "90-100"],
     datasets: [{
       label: 'Estudiantes',
-      data: [0, 1, 5, 64, 103, 19, 0, 0, 0, 0],
+      data: [0, 1, 5, 53, 53, 6, 0, 0, 0, 0],
       backgroundColor: ctx => {
         const i = ctx.dataIndex;
         if (i < 7) return '#dc2626';
@@ -904,7 +904,7 @@ new Chart(document.getElementById('chart-dist-c2'), {
   });
   </script>
 </div></section></div></main>
-<footer>Generado automaticamente &middot; FAU-UG &middot; Ultima actualizacion 20/05/2026 07:17</footer>
+<footer>Generado automaticamente &middot; FAU-UG &middot; Ultima actualizacion 20/05/2026 07:35</footer>
 <script>
 document.getElementById('filtro-carrera').addEventListener('change', event => {
   document.querySelectorAll('.dashboard-panel').forEach(panel => {
