@@ -77,12 +77,66 @@ function compactLabel(value) {
 <body>
 <header>
   <h1>Dashboard Titulacion FAU-UG</h1>
-  <div class="meta">Periodo: 2026 - 2027 TI1 &nbsp;|&nbsp; Semana 16 &nbsp;|&nbsp; Actualizado: 21/07/2026 09:40</div>
+  <div class="meta">Periodo: 2026 - 2027 TI1 &nbsp;|&nbsp; Semana 17 &nbsp;|&nbsp; Actualizado: 22/07/2026 09:31</div>
 </header>
 <nav><a href="#kpis">Resumen</a><a href="#pendientes">Pendientes</a><a href="#retraso">Avance</a><a href="#baja">Baja asistencia</a><a href="#notas">Notas</a><a href="#retiros">Retiros</a></nav>
-<main><div class="filter-bar"><label for="filtro-carrera">Carrera</label><select id="filtro-carrera"><option value="todas">Todas las carreras</option><option value="c1">ARQUITECTURA (SEMESTRAL)</option><option value="c2">ARQUITECTURA-2018</option></select></div><div class="dashboard-panel" data-scope="todas"><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">134</div><div class="kpi-label">Estudiantes activos</div><div class="kpi-sub">de 139 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">5</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">4% de matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">0</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">6</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">4% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">8</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">6% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">16</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<main><div class="filter-bar"><label for="filtro-carrera">Carrera</label><select id="filtro-carrera"><option value="todas">Todas las carreras</option><option value="c1">ARQUITECTURA (SEMESTRAL)</option><option value="c2">ARQUITECTURA-2018</option></select></div><div class="dashboard-panel" data-scope="todas"><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">134</div><div class="kpi-label">Estudiantes activos</div><div class="kpi-sub">de 139 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">5</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">4% de matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">0</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">6</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">4% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">8</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">6% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">17</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes"><h2>Asistencia pendiente por tutor</h2><p class="ok">Sin pendientes.</p></section>
-<section id="retraso"><h2>Avance por docente</h2><p class="ok">Todos al dia con la semana 16.</p></section>
+<section id="retraso">
+<h2>Docentes con avance inferior a la semana 17
+  <span class="badge badge-warn">54 docentes</span>
+</h2>
+<div class="chart-scroll">
+  <div class="chart-wrap" style="height:1512px">
+    <canvas id="chart-retraso" aria-label="Grafico de barras: docentes con avance inferior a la semana actual" role="img"></canvas>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('chart-retraso'), {
+  type: 'bar',
+  data: {
+    labels: ["AGUIRRE DELEG JOSE ANDRES", "ALMEIDA CHICAIZA BYRON SEBASTIAN", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "BREVI MARTINEZ VALENTINA", "BRIONES MACIAS JUAN CARLOS", "BUSTAMANTE ALARCON WILLIAN FELIPE", "BUÑAY CAMBA DANIEL ALEXANDER", "CALI PROAÑO ANGELA FRANCISCA", "CAMPOVERDE RIVERA CINDY ESTHER", "CAMPOVERDE TABARA LAURA MARIEN", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "CHARA MOREIRA PEDRO NAPOLEÓN", "CUENCA MARQUEZ CESAR ARTURO", "DELGADO BOHORQUEZ ALINA ALEXANDRA", "DELGADO CRUZ AIMEE DEL ROCÍO", "DONOSO MOGOLLON TANYA PAMELA", "ECHEVERRIA MAGGI EDDIE EFRÉN", "FLORES BELTRAN PATRICIA KATHERINE", "FORERO FUENTES BORIS ANDREI", "GUERRERO FERRECCIO CARLOS AUGUSTO", "HIDALGO SILVA DAVID GONZALO", "LOMAS FRANCO MIRIAM ELIZABETH", "LOZANO LEIVA ANDREA NATALIA", "LUDEÑA ZERDA JORGE FRANKLIN", "LUPERA MARTINEZ MARIA DEL PILAR", "MANZABA CARVAJAL GHYSLAINE ROMINA", "MARIN SANTAMARIA MALENA PIERINA", "MOLINA VASQUEZ FELIPE ANDRES", "MORA ALVARADO ENRIQUE ALEJANDRO", "MORALES VERGARA IVETHEYAMEL", "MURILLO ALAVA PEDRO FABRICIO", "MUÑOZ SALAZAR FRANS JHASMANY", "ORTEGA ASTUDILLO ROSA LETICIA", "PALACIOS PORTES CARLOS", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "PEREZ MATO DAISY DE LA CARIDAD", "ROMERO JARA MARIA ISABEL", "SAAVEDRA ROBLES LILEANA CAROLINA", "SALTOS ESPINOZA LUIS ALFONSO", "SALVADOR MINUCHE MARIA ANDREA", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "SANDOYA LARA RICARDO ANDRES", "SEIS MENDOZA LUIS AMANDO", "SUCO VALLE CARLOS ANDRES", "TORRES DEL SALTO ROMMY ADELFA", "TORRES ESPINOZA JUAN CARLOS", "TORRES RUILOVA BISMARK OSMANY", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "VALENCIA ROBLES RICARDO ANDRES", "VEGA VERDUGA JORGE ALBERTO", "VELEZ ASPIAZU EVA ESTHER", "VIDAL PIZARRO KATHERINE CUMANDA", "YEPEZ QUINTANA MARIO WILLIAM"],
+    datasets: [{
+      label: 'Ultima semana registrada',
+      data: [16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0],
+      backgroundColor: '#f97316',
+      borderColor: '#c2410c',
+      borderWidth: 1,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        color: '#1e293b', font: { weight: 'bold', size: 12 },
+        formatter: v => v
+      },
+      annotation: {
+        annotations: {
+          lineaSemana: {
+            type: 'line', scaleID: 'x', value: 17,
+            borderColor: '#dc2626', borderWidth: 2, borderDash: [6,4],
+            label: { display: true, content: 'Semana actual: 17',
+                      position: 'end', color: '#dc2626', font: { size: 11 } }
+          }
+        }
+      }
+    },
+    scales: {
+      x: { beginAtZero: true, max: 18,
+             title: { display: true, text: 'Promedio de semanas registradas' } },
+      y: { ticks: { font: { size: 11 }, callback: compactLabel } }
+    }
+  },
+  plugins: [ChartDataLabels, ChartAnnotation]
+});
+</script>
+</section>
 <section id="baja">
 <h2>Baja asistencia (&lt;70%)
   <span class="badge badge-danger">6 registros de tutoria</span>
@@ -175,7 +229,7 @@ new Chart(document.getElementById('chart-dist'), {
 </script>
 </section>
 <section id="notas"><h2>Estado de notas</h2><div class="subsec">
-  <h3>Nota Tutor <span class='badge badge-warn'>118 sin nota</span></h3>
+  <h3>Nota Tutor <span class='badge badge-warn'>97 sin nota</span></h3>
   <div class="chart-scroll">
     <div class="chart-wrap" style="height:1326px">
       <canvas id="chart-nota-tutor" aria-label="Grafico de barras apiladas: estado de notas por docente" role="img"></canvas>
@@ -185,11 +239,11 @@ new Chart(document.getElementById('chart-dist'), {
   new Chart(document.getElementById('chart-nota-tutor'), {
     type: 'bar',
     data: {
-      labels: ["AGUIRRE DELEG JOSE ANDRES", "VEGA VERDUGA JORGE ALBERTO", "GUERRERO FERRECCIO CARLOS AUGUSTO", "HIDALGO SILVA DAVID GONZALO", "VIDAL PIZARRO KATHERINE CUMANDA", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "SALVADOR MINUCHE MARIA ANDREA", "CAMPOVERDE RIVERA CINDY ESTHER", "ORTEGA ASTUDILLO ROSA LETICIA", "ALMEIDA CHICAIZA BYRON SEBASTIAN", "BRIONES MACIAS JUAN CARLOS", "TORRES RUILOVA BISMARK OSMANY", "BUSTAMANTE ALARCON WILLIAN FELIPE", "LUPERA MARTINEZ MARIA DEL PILAR", "YEPEZ QUINTANA MARIO WILLIAM", "CAMPOVERDE TABARA LAURA MARIEN", "MORA ALVARADO ENRIQUE ALEJANDRO", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "TORRES ESPINOZA JUAN CARLOS", "MOLINA VASQUEZ FELIPE ANDRES", "MURILLO ALAVA PEDRO FABRICIO", "MUÑOZ SALAZAR FRANS JHASMANY", "DELGADO BOHORQUEZ ALINA ALEXANDRA", "LUDEÑA ZERDA JORGE FRANKLIN", "ECHEVERRIA MAGGI EDDIE EFRÉN", "CHARA MOREIRA PEDRO NAPOLEÓN", "BUÑAY CAMBA DANIEL ALEXANDER", "SEIS MENDOZA LUIS AMANDO", "VELEZ ASPIAZU EVA ESTHER", "LOMAS FRANCO MIRIAM ELIZABETH", "FLORES BELTRAN PATRICIA KATHERINE", "CALI PROAÑO ANGELA FRANCISCA", "DELGADO CRUZ AIMEE DEL ROCÍO", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "BREVI MARTINEZ VALENTINA", "MARIN SANTAMARIA MALENA PIERINA", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "ROMERO JARA MARIA ISABEL", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "LOZANO LEIVA ANDREA NATALIA", "MORALES VERGARA IVETHEYAMEL", "DONOSO MOGOLLON TANYA PAMELA", "SAAVEDRA ROBLES LILEANA CAROLINA", "SANDOYA LARA RICARDO ANDRES", "FORERO FUENTES BORIS ANDREI", "PALACIOS PORTES CARLOS", "SUCO VALLE CARLOS ANDRES", "MANZABA CARVAJAL GHYSLAINE ROMINA", "CUENCA MARQUEZ CESAR ARTURO", "TORRES DEL SALTO ROMMY ADELFA", "SANDOVAL BAQUERIZO BOLIVAR OMAR"],
+      labels: ["GUERRERO FERRECCIO CARLOS AUGUSTO", "VEGA VERDUGA JORGE ALBERTO", "ALMEIDA CHICAIZA BYRON SEBASTIAN", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "VIDAL PIZARRO KATHERINE CUMANDA", "CAMPOVERDE RIVERA CINDY ESTHER", "SALVADOR MINUCHE MARIA ANDREA", "HIDALGO SILVA DAVID GONZALO", "MORA ALVARADO ENRIQUE ALEJANDRO", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "CAMPOVERDE TABARA LAURA MARIEN", "BRIONES MACIAS JUAN CARLOS", "TORRES RUILOVA BISMARK OSMANY", "BUSTAMANTE ALARCON WILLIAN FELIPE", "MURILLO ALAVA PEDRO FABRICIO", "MUÑOZ SALAZAR FRANS JHASMANY", "MARIN SANTAMARIA MALENA PIERINA", "MOLINA VASQUEZ FELIPE ANDRES", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "LOZANO LEIVA ANDREA NATALIA", "SEIS MENDOZA LUIS AMANDO", "VELEZ ASPIAZU EVA ESTHER", "CALI PROAÑO ANGELA FRANCISCA", "BUÑAY CAMBA DANIEL ALEXANDER", "BREVI MARTINEZ VALENTINA", "ECHEVERRIA MAGGI EDDIE EFRÉN", "LUDEÑA ZERDA JORGE FRANKLIN", "FLORES BELTRAN PATRICIA KATHERINE", "CHARA MOREIRA PEDRO NAPOLEÓN", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "LUPERA MARTINEZ MARIA DEL PILAR", "ROMERO JARA MARIA ISABEL", "LOMAS FRANCO MIRIAM ELIZABETH", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "DONOSO MOGOLLON TANYA PAMELA", "MORALES VERGARA IVETHEYAMEL", "SAAVEDRA ROBLES LILEANA CAROLINA", "SANDOYA LARA RICARDO ANDRES", "FORERO FUENTES BORIS ANDREI", "SUCO VALLE CARLOS ANDRES", "MANZABA CARVAJAL GHYSLAINE ROMINA", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "PALACIOS PORTES CARLOS", "DELGADO BOHORQUEZ ALINA ALEXANDRA", "AGUIRRE DELEG JOSE ANDRES", "CUENCA MARQUEZ CESAR ARTURO", "DELGADO CRUZ AIMEE DEL ROCÍO", "ORTEGA ASTUDILLO ROSA LETICIA", "TORRES DEL SALTO ROMMY ADELFA", "YEPEZ QUINTANA MARIO WILLIAM", "TORRES ESPINOZA JUAN CARLOS"],
       datasets: [
-        { label: 'Sin Nota', data: [6, 5, 5, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+        { label: 'Sin Nota', data: [5, 5, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
            backgroundColor: '#94a3b8', borderRadius: 2 },
-        { label: 'Aprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 5, 3],
+        { label: 'Aprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 3, 2, 2, 6, 2, 2, 4, 5, 3, 3],
            backgroundColor: '#16a34a', borderRadius: 2 },
         { label: 'Reprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
            backgroundColor: '#dc2626', borderRadius: 2 },
@@ -273,9 +327,63 @@ new Chart(document.getElementById('chart-dist'), {
 </div>
 <p class="hint">Estado "ANULADA" indica que la matricula del estudiante fue anulada: el retiro voluntario es efectivo y el estudiante ya no esta activo en el programa. Un estudiante puede tener varias ordenes (Individual + Grupal); se cuentan por cedula unica.</p>
 </section></div>
-<div class="dashboard-panel" data-scope="c1" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">14</div><div class="kpi-label">Estudiantes activos</div><div class="kpi-sub">de 15 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">1</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">7% de matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">0</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">2</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">14% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">4</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">29% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">16</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<div class="dashboard-panel" data-scope="c1" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">14</div><div class="kpi-label">Estudiantes activos</div><div class="kpi-sub">de 15 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">1</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">7% de matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">0</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">2</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">14% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">4</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">29% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">17</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes"><h2>Asistencia pendiente por tutor</h2><p class="ok">Sin pendientes.</p></section>
-<section id="retraso"><h2>Avance por docente</h2><p class="ok">Todos al dia con la semana 16.</p></section>
+<section id="retraso">
+<h2>Docentes con avance inferior a la semana 17
+  <span class="badge badge-warn">11 docentes</span>
+</h2>
+<div class="chart-scroll">
+  <div class="chart-wrap" style="height:400px">
+    <canvas id="chart-retraso-c1" aria-label="Grafico de barras: docentes con avance inferior a la semana actual" role="img"></canvas>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('chart-retraso-c1'), {
+  type: 'bar',
+  data: {
+    labels: ["ARAUZ VILLAFUERTE JOFFRE FABIAN", "BUSTAMANTE ALARCON WILLIAN FELIPE", "CHARA MOREIRA PEDRO NAPOLEÓN", "DELGADO CRUZ AIMEE DEL ROCÍO", "LOZANO LEIVA ANDREA NATALIA", "LUDEÑA ZERDA JORGE FRANKLIN", "MORA ALVARADO ENRIQUE ALEJANDRO", "MUÑOZ SALAZAR FRANS JHASMANY", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "SEIS MENDOZA LUIS AMANDO", "TORRES RUILOVA BISMARK OSMANY"],
+    datasets: [{
+      label: 'Ultima semana registrada',
+      data: [16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0],
+      backgroundColor: '#f97316',
+      borderColor: '#c2410c',
+      borderWidth: 1,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        color: '#1e293b', font: { weight: 'bold', size: 12 },
+        formatter: v => v
+      },
+      annotation: {
+        annotations: {
+          lineaSemana: {
+            type: 'line', scaleID: 'x', value: 17,
+            borderColor: '#dc2626', borderWidth: 2, borderDash: [6,4],
+            label: { display: true, content: 'Semana actual: 17',
+                      position: 'end', color: '#dc2626', font: { size: 11 } }
+          }
+        }
+      }
+    },
+    scales: {
+      x: { beginAtZero: true, max: 18,
+             title: { display: true, text: 'Promedio de semanas registradas' } },
+      y: { ticks: { font: { size: 11 }, callback: compactLabel } }
+    }
+  },
+  plugins: [ChartDataLabels, ChartAnnotation]
+});
+</script>
+</section>
 <section id="baja">
 <h2>Baja asistencia (&lt;70%)
   <span class="badge badge-danger">2 registros de tutoria</span>
@@ -368,7 +476,7 @@ new Chart(document.getElementById('chart-dist-c1'), {
 </script>
 </section>
 <section id="notas"><h2>Estado de notas</h2><div class="subsec">
-  <h3>Nota Tutor <span class='badge badge-warn'>14 sin nota</span></h3>
+  <h3>Nota Tutor <span class='badge badge-warn'>13 sin nota</span></h3>
   <div class="chart-scroll">
     <div class="chart-wrap" style="height:400px">
       <canvas id="chart-nota-tutor-c1" aria-label="Grafico de barras apiladas: estado de notas por docente" role="img"></canvas>
@@ -378,11 +486,11 @@ new Chart(document.getElementById('chart-dist-c1'), {
   new Chart(document.getElementById('chart-nota-tutor-c1'), {
     type: 'bar',
     data: {
-      labels: ["MUÑOZ SALAZAR FRANS JHASMANY", "SEIS MENDOZA LUIS AMANDO", "LOZANO LEIVA ANDREA NATALIA", "LUDEÑA ZERDA JORGE FRANKLIN", "BUSTAMANTE ALARCON WILLIAN FELIPE", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "TORRES RUILOVA BISMARK OSMANY", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "MORA ALVARADO ENRIQUE ALEJANDRO", "DELGADO CRUZ AIMEE DEL ROCÍO"],
+      labels: ["MUÑOZ SALAZAR FRANS JHASMANY", "SEIS MENDOZA LUIS AMANDO", "LOZANO LEIVA ANDREA NATALIA", "LUDEÑA ZERDA JORGE FRANKLIN", "TORRES RUILOVA BISMARK OSMANY", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "MORA ALVARADO ENRIQUE ALEJANDRO", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "BUSTAMANTE ALARCON WILLIAN FELIPE", "DELGADO CRUZ AIMEE DEL ROCÍO"],
       datasets: [
-        { label: 'Sin Nota', data: [2, 2, 2, 2, 1, 1, 1, 1, 1, 1],
+        { label: 'Sin Nota', data: [2, 2, 2, 2, 1, 1, 1, 1, 1, 0],
            backgroundColor: '#94a3b8', borderRadius: 2 },
-        { label: 'Aprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        { label: 'Aprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
            backgroundColor: '#16a34a', borderRadius: 2 },
         { label: 'Reprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
            backgroundColor: '#dc2626', borderRadius: 2 },
@@ -466,9 +574,63 @@ new Chart(document.getElementById('chart-dist-c1'), {
 </div>
 <p class="hint">Estado "ANULADA" indica que la matricula del estudiante fue anulada: el retiro voluntario es efectivo y el estudiante ya no esta activo en el programa. Un estudiante puede tener varias ordenes (Individual + Grupal); se cuentan por cedula unica.</p>
 </section></div>
-<div class="dashboard-panel" data-scope="c2" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">120</div><div class="kpi-label">Estudiantes activos</div><div class="kpi-sub">de 124 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">4</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">3% de matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">0</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">4</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">3% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">4</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">3% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">16</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<div class="dashboard-panel" data-scope="c2" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">120</div><div class="kpi-label">Estudiantes activos</div><div class="kpi-sub">de 124 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">4</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">3% de matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">0</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">4</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">3% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">4</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">3% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">17</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes"><h2>Asistencia pendiente por tutor</h2><p class="ok">Sin pendientes.</p></section>
-<section id="retraso"><h2>Avance por docente</h2><p class="ok">Todos al dia con la semana 16.</p></section>
+<section id="retraso">
+<h2>Docentes con avance inferior a la semana 17
+  <span class="badge badge-warn">50 docentes</span>
+</h2>
+<div class="chart-scroll">
+  <div class="chart-wrap" style="height:1400px">
+    <canvas id="chart-retraso-c2" aria-label="Grafico de barras: docentes con avance inferior a la semana actual" role="img"></canvas>
+  </div>
+</div>
+<script>
+new Chart(document.getElementById('chart-retraso-c2'), {
+  type: 'bar',
+  data: {
+    labels: ["AGUIRRE DELEG JOSE ANDRES", "ALMEIDA CHICAIZA BYRON SEBASTIAN", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "BREVI MARTINEZ VALENTINA", "BRIONES MACIAS JUAN CARLOS", "BUSTAMANTE ALARCON WILLIAN FELIPE", "BUÑAY CAMBA DANIEL ALEXANDER", "CALI PROAÑO ANGELA FRANCISCA", "CAMPOVERDE RIVERA CINDY ESTHER", "CAMPOVERDE TABARA LAURA MARIEN", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "CHARA MOREIRA PEDRO NAPOLEÓN", "CUENCA MARQUEZ CESAR ARTURO", "DELGADO BOHORQUEZ ALINA ALEXANDRA", "DELGADO CRUZ AIMEE DEL ROCÍO", "DONOSO MOGOLLON TANYA PAMELA", "ECHEVERRIA MAGGI EDDIE EFRÉN", "FLORES BELTRAN PATRICIA KATHERINE", "FORERO FUENTES BORIS ANDREI", "GUERRERO FERRECCIO CARLOS AUGUSTO", "HIDALGO SILVA DAVID GONZALO", "LOMAS FRANCO MIRIAM ELIZABETH", "LUPERA MARTINEZ MARIA DEL PILAR", "MANZABA CARVAJAL GHYSLAINE ROMINA", "MARIN SANTAMARIA MALENA PIERINA", "MOLINA VASQUEZ FELIPE ANDRES", "MORA ALVARADO ENRIQUE ALEJANDRO", "MORALES VERGARA IVETHEYAMEL", "MURILLO ALAVA PEDRO FABRICIO", "ORTEGA ASTUDILLO ROSA LETICIA", "PALACIOS PORTES CARLOS", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "PEREZ MATO DAISY DE LA CARIDAD", "ROMERO JARA MARIA ISABEL", "SAAVEDRA ROBLES LILEANA CAROLINA", "SALTOS ESPINOZA LUIS ALFONSO", "SALVADOR MINUCHE MARIA ANDREA", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "SANDOYA LARA RICARDO ANDRES", "SUCO VALLE CARLOS ANDRES", "TORRES DEL SALTO ROMMY ADELFA", "TORRES ESPINOZA JUAN CARLOS", "TORRES RUILOVA BISMARK OSMANY", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "VALENCIA ROBLES RICARDO ANDRES", "VEGA VERDUGA JORGE ALBERTO", "VELEZ ASPIAZU EVA ESTHER", "VIDAL PIZARRO KATHERINE CUMANDA", "YEPEZ QUINTANA MARIO WILLIAM"],
+    datasets: [{
+      label: 'Ultima semana registrada',
+      data: [16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0, 16.0],
+      backgroundColor: '#f97316',
+      borderColor: '#c2410c',
+      borderWidth: 1,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {
+        anchor: 'end', align: 'end',
+        color: '#1e293b', font: { weight: 'bold', size: 12 },
+        formatter: v => v
+      },
+      annotation: {
+        annotations: {
+          lineaSemana: {
+            type: 'line', scaleID: 'x', value: 17,
+            borderColor: '#dc2626', borderWidth: 2, borderDash: [6,4],
+            label: { display: true, content: 'Semana actual: 17',
+                      position: 'end', color: '#dc2626', font: { size: 11 } }
+          }
+        }
+      }
+    },
+    scales: {
+      x: { beginAtZero: true, max: 18,
+             title: { display: true, text: 'Promedio de semanas registradas' } },
+      y: { ticks: { font: { size: 11 }, callback: compactLabel } }
+    }
+  },
+  plugins: [ChartDataLabels, ChartAnnotation]
+});
+</script>
+</section>
 <section id="baja">
 <h2>Baja asistencia (&lt;70%)
   <span class="badge badge-danger">4 registros de tutoria</span>
@@ -561,7 +723,7 @@ new Chart(document.getElementById('chart-dist-c2'), {
 </script>
 </section>
 <section id="notas"><h2>Estado de notas</h2><div class="subsec">
-  <h3>Nota Tutor <span class='badge badge-warn'>104 sin nota</span></h3>
+  <h3>Nota Tutor <span class='badge badge-warn'>84 sin nota</span></h3>
   <div class="chart-scroll">
     <div class="chart-wrap" style="height:1222px">
       <canvas id="chart-nota-tutor-c2" aria-label="Grafico de barras apiladas: estado de notas por docente" role="img"></canvas>
@@ -571,11 +733,11 @@ new Chart(document.getElementById('chart-dist-c2'), {
   new Chart(document.getElementById('chart-nota-tutor-c2'), {
     type: 'bar',
     data: {
-      labels: ["AGUIRRE DELEG JOSE ANDRES", "VEGA VERDUGA JORGE ALBERTO", "GUERRERO FERRECCIO CARLOS AUGUSTO", "HIDALGO SILVA DAVID GONZALO", "SALVADOR MINUCHE MARIA ANDREA", "VIDAL PIZARRO KATHERINE CUMANDA", "CAMPOVERDE RIVERA CINDY ESTHER", "ALMEIDA CHICAIZA BYRON SEBASTIAN", "ORTEGA ASTUDILLO ROSA LETICIA", "TORRES ESPINOZA JUAN CARLOS", "BRIONES MACIAS JUAN CARLOS", "CAMPOVERDE TABARA LAURA MARIEN", "YEPEZ QUINTANA MARIO WILLIAM", "LUPERA MARTINEZ MARIA DEL PILAR", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "BUÑAY CAMBA DANIEL ALEXANDER", "CALI PROAÑO ANGELA FRANCISCA", "CHARA MOREIRA PEDRO NAPOLEÓN", "LOMAS FRANCO MIRIAM ELIZABETH", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "ROMERO JARA MARIA ISABEL", "TORRES RUILOVA BISMARK OSMANY", "VELEZ ASPIAZU EVA ESTHER", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "ECHEVERRIA MAGGI EDDIE EFRÉN", "FLORES BELTRAN PATRICIA KATHERINE", "MARIN SANTAMARIA MALENA PIERINA", "DELGADO BOHORQUEZ ALINA ALEXANDRA", "MOLINA VASQUEZ FELIPE ANDRES", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "BREVI MARTINEZ VALENTINA", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "MURILLO ALAVA PEDRO FABRICIO", "MORA ALVARADO ENRIQUE ALEJANDRO", "BUSTAMANTE ALARCON WILLIAN FELIPE", "DONOSO MOGOLLON TANYA PAMELA", "MORALES VERGARA IVETHEYAMEL", "FORERO FUENTES BORIS ANDREI", "DELGADO CRUZ AIMEE DEL ROCÍO", "SANDOYA LARA RICARDO ANDRES", "SAAVEDRA ROBLES LILEANA CAROLINA", "PALACIOS PORTES CARLOS", "SUCO VALLE CARLOS ANDRES", "TORRES DEL SALTO ROMMY ADELFA", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "MANZABA CARVAJAL GHYSLAINE ROMINA", "CUENCA MARQUEZ CESAR ARTURO"],
+      labels: ["GUERRERO FERRECCIO CARLOS AUGUSTO", "VEGA VERDUGA JORGE ALBERTO", "ALMEIDA CHICAIZA BYRON SEBASTIAN", "VIDAL PIZARRO KATHERINE CUMANDA", "CAMPOVERDE RIVERA CINDY ESTHER", "HIDALGO SILVA DAVID GONZALO", "SALVADOR MINUCHE MARIA ANDREA", "CAMPOVERDE TABARA LAURA MARIEN", "BRIONES MACIAS JUAN CARLOS", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "MURILLO ALAVA PEDRO FABRICIO", "MORA ALVARADO ENRIQUE ALEJANDRO", "LOMAS FRANCO MIRIAM ELIZABETH", "FLORES BELTRAN PATRICIA KATHERINE", "LUPERA MARTINEZ MARIA DEL PILAR", "ECHEVERRIA MAGGI EDDIE EFRÉN", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "BUÑAY CAMBA DANIEL ALEXANDER", "BREVI MARTINEZ VALENTINA", "CALI PROAÑO ANGELA FRANCISCA", "MOLINA VASQUEZ FELIPE ANDRES", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "CHARA MOREIRA PEDRO NAPOLEÓN", "VELEZ ASPIAZU EVA ESTHER", "BUSTAMANTE ALARCON WILLIAN FELIPE", "TORRES RUILOVA BISMARK OSMANY", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "ROMERO JARA MARIA ISABEL", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "MARIN SANTAMARIA MALENA PIERINA", "FORERO FUENTES BORIS ANDREI", "MORALES VERGARA IVETHEYAMEL", "SAAVEDRA ROBLES LILEANA CAROLINA", "DONOSO MOGOLLON TANYA PAMELA", "SANDOYA LARA RICARDO ANDRES", "YEPEZ QUINTANA MARIO WILLIAM", "TORRES ESPINOZA JUAN CARLOS", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "TORRES DEL SALTO ROMMY ADELFA", "DELGADO CRUZ AIMEE DEL ROCÍO", "CUENCA MARQUEZ CESAR ARTURO", "AGUIRRE DELEG JOSE ANDRES", "DELGADO BOHORQUEZ ALINA ALEXANDRA", "SUCO VALLE CARLOS ANDRES", "PALACIOS PORTES CARLOS", "ORTEGA ASTUDILLO ROSA LETICIA", "MANZABA CARVAJAL GHYSLAINE ROMINA"],
       datasets: [
-        { label: 'Sin Nota', data: [6, 5, 5, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+        { label: 'Sin Nota', data: [5, 5, 4, 4, 4, 4, 4, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
            backgroundColor: '#94a3b8', borderRadius: 2 },
-        { label: 'Aprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 5, 3, 2, 2],
+        { label: 'Aprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 5, 1, 2, 6, 2, 2, 2, 4, 2],
            backgroundColor: '#16a34a', borderRadius: 2 },
         { label: 'Reprobatoria', data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
            backgroundColor: '#dc2626', borderRadius: 2 },
@@ -659,7 +821,7 @@ new Chart(document.getElementById('chart-dist-c2'), {
 </div>
 <p class="hint">Estado "ANULADA" indica que la matricula del estudiante fue anulada: el retiro voluntario es efectivo y el estudiante ya no esta activo en el programa. Un estudiante puede tener varias ordenes (Individual + Grupal); se cuentan por cedula unica.</p>
 </section></div></main>
-<footer>Generado automaticamente &middot; FAU-UG &middot; Ultima actualizacion 21/07/2026 09:40</footer>
+<footer>Generado automaticamente &middot; FAU-UG &middot; Ultima actualizacion 22/07/2026 09:31</footer>
 <script>
 document.getElementById('filtro-carrera').addEventListener('change', event => {
   document.querySelectorAll('.dashboard-panel').forEach(panel => {
