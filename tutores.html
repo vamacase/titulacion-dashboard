@@ -1,0 +1,901 @@
+<title>Cupos de Tutores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:            #F7F5F1;
+    --bg-raised:     #FFFFFF;
+    --bg-sunken:     #EFEBE3;
+    --ink:           #211D17;
+    --ink-soft:      #5B564C;
+    --ink-faint:     #8B8578;
+    --line:          #E1DCD1;
+    --line-soft:     #ECE8DF;
+    --accent:        #2C4A6E;
+    --accent-soft:   #E6ECF2;
+    --accent-ink:    #1D3550;
+
+    --status-completo-bg:   #FBEBD2;
+    --status-completo-ink:  #8A5A0E;
+    --status-completo-dot:  #D68F2C;
+
+    --status-medio-bg:      #E3EEDC;
+    --status-medio-ink:     #3E6B2E;
+    --status-medio-dot:     #5E9A47;
+
+    --status-libre-bg:      #F1F5EC;
+    --status-libre-ink:     #5C7A4C;
+    --status-libre-dot:     #9AB585;
+
+    --status-pendiente-bg:   #F7DEDA;
+    --status-pendiente-ink:  #9B4A3C;
+    --status-pendiente-dot:  #C56A57;
+
+    --shadow: 0 1px 2px rgba(33,29,23,0.04), 0 4px 16px rgba(33,29,23,0.06);
+    --radius: 10px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:            #191712;
+      --bg-raised:     #211E18;
+      --bg-sunken:     #14120E;
+      --ink:           #EDE9E0;
+      --ink-soft:      #B3AB9B;
+      --ink-faint:     #7C7566;
+      --line:          #34302A;
+      --line-soft:     #2A271F;
+      --accent:        #7FA8D6;
+      --accent-soft:   #22303F;
+      --accent-ink:    #A9C6E8;
+
+      --status-completo-bg:   #3A2E14;
+      --status-completo-ink:  #E8B564;
+      --status-completo-dot:  #D68F2C;
+
+      --status-medio-bg:      #223420;
+      --status-medio-ink:     #9BCB86;
+      --status-medio-dot:     #5E9A47;
+
+      --status-libre-bg:      #23281F;
+      --status-libre-ink:     #A8BE97;
+      --status-libre-dot:     #9AB585;
+
+      --status-pendiente-bg:   #3D241E;
+      --status-pendiente-ink:  #E6A395;
+      --status-pendiente-dot:  #C56A57;
+
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 20px rgba(0,0,0,0.35);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg:            #191712;
+    --bg-raised:     #211E18;
+    --bg-sunken:     #14120E;
+    --ink:           #EDE9E0;
+    --ink-soft:      #B3AB9B;
+    --ink-faint:     #7C7566;
+    --line:          #34302A;
+    --line-soft:     #2A271F;
+    --accent:        #7FA8D6;
+    --accent-soft:   #22303F;
+    --accent-ink:    #A9C6E8;
+
+    --status-completo-bg:   #3A2E14;
+    --status-completo-ink:  #E8B564;
+    --status-completo-dot:  #D68F2C;
+
+    --status-medio-bg:      #223420;
+    --status-medio-ink:     #9BCB86;
+    --status-medio-dot:     #5E9A47;
+
+    --status-libre-bg:      #23281F;
+    --status-libre-ink:     #A8BE97;
+    --status-libre-dot:     #9AB585;
+
+    --status-pendiente-bg:   #3D241E;
+    --status-pendiente-ink:  #E6A395;
+    --status-pendiente-dot:  #C56A57;
+
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 20px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--accent-soft); color: var(--accent-ink); }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 40px 28px 80px;
+  }
+
+  /* ---------- Header ---------- */
+
+  header.page {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 32px;
+  }
+
+  .eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  h1 {
+    font-family: "Fraunces", Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(28px, 4vw, 38px);
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .subhead {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    max-width: 62ch;
+  }
+
+  /* ---------- KPI strip ---------- */
+
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+  }
+
+  .kpi {
+    background: var(--bg-raised);
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .kpi .n {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 32px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  .kpi .label {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .kpi.completo .n  { color: var(--status-completo-ink); }
+  .kpi.medio .n     { color: var(--status-medio-ink); }
+  .kpi.libre .n     { color: var(--status-libre-ink); }
+  .kpi.pendiente .n { color: var(--status-pendiente-ink); }
+
+  /* capacity bar */
+  .capacity {
+    margin-bottom: 32px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    box-shadow: var(--shadow);
+  }
+
+  .capacity-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+
+  .capacity-head .t {
+    font-weight: 600;
+    font-size: 13.5px;
+  }
+
+  .capacity-head .v {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bar {
+    height: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    background: var(--bg-sunken);
+  }
+
+  .bar span { display: block; height: 100%; }
+  .bar .b-completo { background: var(--status-completo-dot); }
+  .bar .b-medio    { background: var(--status-medio-dot); }
+  .bar .b-libre    { background: var(--status-libre-dot); }
+
+  .bar-legend {
+    display: flex;
+    gap: 18px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .bar-legend .item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%; flex: none;
+  }
+  .dot.completo  { background: var(--status-completo-dot); }
+  .dot.medio     { background: var(--status-medio-dot); }
+  .dot.libre     { background: var(--status-libre-dot); }
+  .dot.pendiente { background: var(--status-pendiente-dot); }
+
+  .jump-pending {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--status-pendiente-ink);
+    background: var(--status-pendiente-bg);
+    border: 1px solid transparent;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: filter 0.15s ease;
+  }
+
+  .jump-pending:hover { filter: brightness(0.96); }
+
+  /* ---------- Controls ---------- */
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 6px;
+    background: var(--bg-sunken);
+    padding: 4px;
+    border-radius: 999px;
+  }
+
+  .filter-btn {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    background: transparent;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover { color: var(--ink); }
+
+  .filter-btn.active {
+    background: var(--bg-raised);
+    color: var(--ink);
+    box-shadow: 0 1px 3px rgba(33,29,23,0.12);
+  }
+
+  .search-wrap {
+    position: relative;
+    margin-left: auto;
+    flex: 1 1 220px;
+    max-width: 280px;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 13.5px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 12px 8px 32px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .search-wrap input:focus {
+    border-color: var(--accent);
+  }
+
+  .search-wrap svg {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    stroke: var(--ink-faint);
+    pointer-events: none;
+  }
+
+  .result-count {
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Tutor grid ---------- */
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+  }
+
+  .card[data-status="completo"] { border-left: 3px solid var(--status-completo-dot); }
+  .card[data-status="medio"]    { border-left: 3px solid var(--status-medio-dot); }
+  .card[data-status="libre"]    { border-left: 3px solid var(--status-libre-dot); }
+
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .card-head:hover { background: var(--line-soft); }
+
+  .card-id { min-width: 0; }
+
+  .card-name {
+    font-weight: 600;
+    font-size: 14.5px;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-email {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: none;
+  }
+
+  .pill {
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .pill.completo { background: var(--status-completo-bg); color: var(--status-completo-ink); }
+  .pill.medio    { background: var(--status-medio-bg);    color: var(--status-medio-ink); }
+  .pill.libre    { background: var(--status-libre-bg);    color: var(--status-libre-ink); }
+
+  .chev {
+    width: 16px; height: 16px;
+    stroke: var(--ink-faint);
+    transition: transform 0.18s ease;
+    flex: none;
+  }
+  .card.open .chev { transform: rotate(180deg); }
+
+  .card-body {
+    display: none;
+    border-top: 1px solid var(--line-soft);
+    padding: 4px 16px 14px;
+  }
+  .card.open .card-body { display: block; }
+
+  .job {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .job:last-child { border-bottom: none; }
+
+  .job-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .job-type {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+
+  .job-date {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .job-students {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .job-students .s {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 3px 0;
+  }
+
+  .job-students .s + .s {
+    border-top: 1px dotted var(--line);
+    padding-top: 5px;
+    margin-top: 2px;
+  }
+
+  .job-students .ci {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+  }
+
+  .job-theme {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 5px;
+    line-height: 1.45;
+  }
+
+  .empty-slot {
+    padding: 14px 0;
+    font-size: 13px;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  .no-results {
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 14px;
+    grid-column: 1 / -1;
+  }
+
+  .pill.sin-tutor { background: var(--status-pendiente-bg); color: var(--status-pendiente-ink); }
+
+  /* ---------- Pending section ---------- */
+
+  .pending {
+    margin-top: 36px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--status-pendiente-dot);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .pending-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 18px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .pending-head:hover { background: var(--line-soft); }
+
+  .pending h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 19px;
+    margin: 0 0 4px;
+  }
+
+  .pending-sub {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 56ch;
+  }
+
+  .pending-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: none;
+    padding-top: 2px;
+  }
+
+  .pending-body {
+    display: none;
+    border-top: 1px solid var(--line-soft);
+    overflow-x: auto;
+  }
+
+  .pending.open .pending-body { display: block; }
+  .pending.open .pending-head .chev { transform: rotate(180deg); }
+
+  .pending-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    min-width: 560px;
+  }
+
+  .pending-table thead th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-sunken);
+  }
+
+  .pending-table td {
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: top;
+  }
+
+  .pending-table tr:last-child td { border-bottom: none; }
+
+  .pending-table .p-email {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+  }
+
+  .pending-table .p-sit {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    max-width: 40ch;
+  }
+
+  footer.page {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  footer.page code {
+    font-family: "JetBrains Mono", monospace;
+    background: var(--bg-sunken);
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 640px) {
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .search-wrap { max-width: none; margin-left: 0; width: 100%; }
+    .controls { flex-direction: column; align-items: stretch; }
+    .filter-group { justify-content: center; }
+    .jump-pending { justify-content: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="page">
+    <span class="eyebrow">Titulación · Período 2026‑2027 TI2</span>
+    <h1>Cupos de tutores de titulación</h1>
+    <p class="subhead">Estado de asignación de los 57 docentes designados como tutores este período — cada uno con capacidad para 2 trabajos de titulación. Incluye a los estudiantes aptos que aún no tienen tutor confirmado.</p>
+  </header>
+
+  <div class="kpis">
+    <div class="kpi">
+      <div class="n" id="kpi-tutores">57</div>
+      <div class="label">Tutores designados</div>
+    </div>
+    <div class="kpi completo">
+      <div class="n" id="kpi-completo">20</div>
+      <div class="label">Cupo completo (2/2)</div>
+    </div>
+    <div class="kpi medio">
+      <div class="n" id="kpi-medio">11</div>
+      <div class="label">Cupo parcial (1/2)</div>
+    </div>
+    <div class="kpi libre">
+      <div class="n" id="kpi-libre">26</div>
+      <div class="label">Cupo disponible (0/2)</div>
+    </div>
+    <div class="kpi pendiente">
+      <div class="n" id="kpi-pendientes">34</div>
+      <div class="label">Estudiantes sin tutor</div>
+    </div>
+  </div>
+
+  <div class="capacity">
+    <div class="capacity-head">
+      <span class="t">Ocupación de cupos totales</span>
+      <span class="v" id="cap-summary">51 / 114 cupos ocupados</span>
+    </div>
+    <div class="bar" id="capacity-bar">
+      <span class="b-completo" id="b-completo"></span>
+      <span class="b-medio" id="b-medio"></span>
+      <span class="b-libre" id="b-libre"></span>
+    </div>
+    <div class="bar-legend">
+      <span class="item"><span class="dot completo"></span>Trabajos en tutores completos</span>
+      <span class="item"><span class="dot medio"></span>Trabajos en tutores con 1 cupo libre</span>
+      <span class="item"><span class="dot libre"></span>Cupos aún sin asignar</span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="filter-group" id="filters">
+      <button class="filter-btn active" data-filter="todos" id="f-todos">Todos</button>
+      <button class="filter-btn" data-filter="completo" id="f-completo">Completo</button>
+      <button class="filter-btn" data-filter="medio" id="f-medio">Parcial</button>
+      <button class="filter-btn" data-filter="libre" id="f-libre">Disponible</button>
+    </div>
+    <button class="jump-pending" id="jump-pending" type="button">
+      <span class="dot pendiente"></span>
+      <span id="jump-pending-label">Sin tutor</span>
+    </button>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="search" placeholder="Buscar tutor o estudiante…" autocomplete="off">
+    </div>
+  </div>
+
+  <p class="result-count" id="result-count"></p>
+
+  <div class="grid" id="grid"></div>
+
+  <section class="pending" id="pending-section">
+    <div class="pending-head" onclick="document.getElementById('pending-section').classList.toggle('open')">
+      <div>
+        <h2>Estudiantes sin tutor asignado</h2>
+        <p class="pending-sub">Aptos y repitentes de TI2 que aún deben confirmar o gestionar su tutor con la Dirección.</p>
+      </div>
+      <div class="pending-right">
+        <span class="pill sin-tutor" id="pending-count"></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="pending-body">
+      <table class="pending-table">
+        <thead>
+          <tr><th>Estudiante</th><th>Email</th><th>Situación</th></tr>
+        </thead>
+        <tbody id="pending-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="page">
+    <span>Fuente: <code>3.0-Tutores/asignaciones.csv</code> — Dirección de Carrera de Arquitectura, FAU‑UG</span>
+    <span id="generated"></span>
+  </footer>
+
+</div>
+
+<script>
+const DATA = [{"tutor": "Aguirre Deleg Jose Andres", "email": "jose.aguirre@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "INDIVIDUAL", "est1": "Garcia Vera Franksuha Lilibeth", "email1": "franksuha.garcia@ug.edu.ec", "est2": "", "email2": null, "fecha": "2026-06-02"}, {"tipo": "GRUPAL", "est1": "Morales Vega Desiren Maribel", "email1": "desiren.morales@ug.edu.ec", "est2": "Loja Baque Lesli Aile", "email2": "lesli.loja@ug.edu.ec", "fecha": "2026-06-09"}]}, {"tutor": "Almeida Chicaiza Byron Sebastian", "email": "byron.almeidac@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Arauz Villafuerte Joffre Fabian", "email": "joffre.arauzv@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Salcedo Dumaguala Britney Naomi", "email1": "britney.salcedod@ug.edu.ec", "est2": "Narvaez Piguave Dayana Lisbeth", "email2": "dayana.narvaez@ug.edu.ec", "fecha": "2026-06-01"}, {"tipo": "INDIVIDUAL", "est1": "Astudillo Dioses Jacer Elias", "email1": "jacer.astudillo@ug.edu.ec", "est2": "", "email2": null, "fecha": "2026-07-16"}]}, {"tutor": "Brevi Martinez Valentina", "email": "valentina.brevim@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Sanchez Romero Joshua Ivan", "email1": "joshua.sanchez@ug.edu.ec", "est2": "Rodriguez Piguave Adrian Isaac", "email2": "adrian.rodriguez@ug.edu.ec", "fecha": "2026-06-08"}, {"tipo": "GRUPAL", "est1": "Riquero Cagua Nayivi Joselyn", "email1": null, "est2": "Leon Castillo Victor Eduardo", "email2": "victor.leon@ug.edu.ec", "fecha": "2026-08-21"}]}, {"tutor": "Briones Macias Juan Carlos", "email": "juan.brionesma@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Bunay Camba Daniel Alexander", "email": "daniel.bunay@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Avila Cedeno Ana Claudia", "email1": "ana.avila@ug.edu.ec", "est2": "Palacios Trivino Jose Isaac", "email2": "jose.palacios@ug.edu.ec", "fecha": "2026-06-05"}, {"tipo": "INDIVIDUAL", "est1": "Tigre Brito Andres Alessandro", "email1": "andres.tigre@ug.edu.ec", "est2": "", "email2": null, "fecha": "2026-06-17"}]}, {"tutor": "Burgos Flores Johnny Francisco", "email": "johnny.burgosf@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Bustamante Alarcon Willian Felipe", "email": "felipe.bustamantea@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Campoverde Rivera Cindy Esther", "email": "cindy.campoverder@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Campoverde Tabara Laura Marien", "email": "laura.campoverdet@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Tinoco Junco Andrea Mishell", "email1": "andrea.tinocoj@ug.edu.ec", "est2": "Briones Torres Omar Arturo", "email2": "omar.briones@ug.edu.ec", "fecha": "2026-06-08"}, {"tipo": "INDIVIDUAL", "est1": "Granja Herrera Francisco Ricardo", "email1": "francisco.granja@ug.edu.ec", "est2": "", "email2": null, "fecha": "2026-08-21"}]}, {"tutor": "Carvajal Ballesteros Erika Elizabeth", "email": "erika.carvajalb@ug.edu.ec", "n": 1, "estado": "medio", "trabajos": [{"tipo": "GRUPAL", "est1": "Ortega Vaca Dhana Pierina", "email1": "dhana.ortega@ug.edu.ec", "est2": "Luque Garcia Carlos Josue", "email2": "carlos.luque@ug.edu.ec", "fecha": "2026-06-02"}]}, {"tutor": "Chara Moreira Pedro Napoleon", "email": "pedro.charam@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "INDIVIDUAL", "est1": "Chavez Rea Carlos Renan", "email1": null, "est2": "", "email2": null, "fecha": "2026-07-14"}, {"tipo": "INDIVIDUAL", "est1": "Jurado Montesdeoca Angel Patricio", "email1": "angel.jurado@ug.edu.ec", "est2": "", "email2": null, "fecha": "2026-07-17"}]}, {"tutor": "Cuenca Marquez Cesar Arturo", "email": "cesar.cuencam@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Torres Quimi Joshua Leonel", "email1": "joshua.torres@ug.edu.ec", "est2": "Lopez Moreira Haily Veronica", "email2": "haily.lopez@ug.edu.ec", "fecha": "2026-06-04"}, {"tipo": "GRUPAL", "est1": "Olvera Lopez Adriana Samantha", "email1": "adriana.olvera@ug.edu.ec", "est2": "Gomez Zambrano Daniel Estevan", "email2": "daniel.gomez@ug.edu.ec", "fecha": "2026-07-17"}]}, {"tutor": "Cueva Tumbaco Jose Enrique", "email": "jose.cuevat@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Delgado Cruz Aimee Del Rocio", "email": "aimee.delgado@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Correa Moreno Camila Belen", "email1": "camila.correa@ug.edu.ec", "est2": "Tigrero Prudente Carlos Andres", "email2": "carlos.tigrero@ug.edu.ec", "fecha": "2026-06-04"}, {"tipo": "GRUPAL", "est1": "Loza Mendez Dayana Jamile", "email1": "jamile.loza@ug.edu.ec", "est2": "Rodriguez Moreira Erick Steven", "email2": "erick.rodriguez@ug.edu.ec", "fecha": "2026-07-16"}]}, {"tutor": "Donoso Mogollon Tanya Pamela", "email": "tanya.donosom@ug.edu.ec", "n": 1, "estado": "medio", "trabajos": [{"tipo": "INDIVIDUAL", "est1": "Roman Amaya Melany Ivanna", "email1": "melany.roman@ug.edu.ec", "est2": "", "email2": null, "fecha": "2026-06-05"}]}, {"tutor": "Echeverria Maggi Eddie Efren", "email": "eddie.echeverriam@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "INDIVIDUAL", "est1": "Bravo Herrera Jose Luis", "email1": "jose.bravoh@ug.edu.ec", "est2": "", "email2": null, "fecha": "2026-08-06"}, {"tipo": "GRUPAL", "est1": "Manzaba Erazo Angel Alfredo", "email1": "angel.manzabae@ug.edu.ec", "est2": "Franco Zambrano Carlos Alberto", "email2": "carlos.francoz@ug.edu.ec", "fecha": "2026-08-12"}]}, {"tutor": "Espinoza Ordoñez Jose Felipe", "email": "felipe.espinozao@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Flores Beltran Patricia Katherine", "email": "patricia.floresbel@ug.edu.ec", "n": 1, "estado": "medio", "trabajos": [{"tipo": "GRUPAL", "est1": "Hernandez Pesantes Milena Scarlett", "email1": "milena.hernandez@ug.edu.ec", "est2": "Jima Cabrera Jose Lester", "email2": "jose.jima@ug.edu.ec", "fecha": "2026-06-05"}]}, {"tutor": "Forero Fuentes Boris Andrei", "email": "boris.forerof@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Gomez Lugo Edmundo Javier", "email": "edmundo.gomezl@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "INDIVIDUAL", "est1": "Llerena Lopez Alba Yelena", "email1": "alba.llerena@ug.edu.ec", "est2": "", "email2": null, "fecha": "2026-06-02"}, {"tipo": "GRUPAL", "est1": "Chamba Ruiz Israel Eduardo", "email1": "israel.chamba@ug.edu.ec", "est2": "Nieto Solorzano Nelly Carolina", "email2": "nelly.nieto@ug.edu.ec", "fecha": "2026-08-07"}]}, {"tutor": "Guerrero Ferreccio Carlos Augusto", "email": "carlos.guerrerofe@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Gunsha Cahuana Alisson Nathaly", "email1": "alisson.gunsha@ug.edu.ec", "est2": "Tubon Cunalema Dayana Lissette", "email2": "dayana.tubon@ug.edu.ec", "fecha": "2026-06-02"}, {"tipo": "GRUPAL", "est1": "Saltos Perez Theo Jhonan", "email1": "theo.saltos@ug.edu.ec", "est2": "Cordova Espinoza Carla Gabriela", "email2": "carla.cordova@ug.edu.ec", "fecha": "2026-06-10"}]}, {"tutor": "Guerrero Valverde Gabriela Cristina", "email": "gabriela.guerrerov@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Hidalgo Silva David Gonzalo", "email": "david.hidalgos@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Lomas Franco Miriam Elizabeth", "email": "mirian.lomasf@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Lozano Leiva Andrea Natalia", "email": "andrea.lozanol@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Ludeña Zerda Jorge Franklin", "email": "jorge.ludenaz@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Manzaba Carvajal Ghyslaine Romina", "email": "ghyslaine.manzabacar@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Mite Holguin Evelyn Ruth", "email": "evelyn.miteh@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Mora Alvarado Enrique Alejandro", "email": "enrique.moraalv@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Mora Ponce Allison Ghislane", "email1": "allison.mora@ug.edu.ec", "est2": "Cruz Anzules Victor Isaac", "email2": "victor.cruz@ug.edu.ec", "fecha": "2026-06-05"}, {"tipo": "GRUPAL", "est1": "Molina Ruiz Anabel Jamilex", "email1": "anabel.molina@ug.edu.ec", "est2": "Sanchez Gavilanes Guiseppt Roger", "email2": "roger.gavilanes@ug.edu.ec", "fecha": "2026-08-13"}]}, {"tutor": "Morales Vergara Ivetheyamel", "email": "ivetheyamel.moralesv@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Munoz Salazar Frans Jhasmany", "email": "frans.munozsal@ug.edu.ec", "n": 3, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Loja Ladines Allison Daniela", "email1": "allison.loja@ug.edu.ec", "est2": "Marcillo Munoz Britney Bethzabeth", "email2": "britney.marcillo@ug.edu.ec", "fecha": "2026-06-09"}, {"tipo": "GRUPAL", "est1": "Bowen Vergara Sally Ahymed", "email1": "sally.bowen@ug.edu.ec", "est2": "Cadena Cedeno Francisco Xavier", "email2": "francisco.cadena@ug.edu.ec", "fecha": "2026-06-11"}, {"tipo": "GRUPAL", "est1": "Castillo Jalka Luis Antonio", "email1": null, "est2": "Figueroa Rodriguez Samantha Carolina", "email2": null, "fecha": "2026-08-22"}]}, {"tutor": "Murillo Alava Pedro Fabricio", "email": "pedro.murilloa@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Ortega Astudillo Rosa Leticia", "email": "rosa.ortegaa@ug.edu.ec", "n": 1, "estado": "medio", "trabajos": [{"tipo": "GRUPAL", "est1": "Tenesaca Pincay Cristina Nathaly", "email1": "cristina.tenesacap@ug.edu.ec", "est2": "Sebichai Guerra Kevin Abrahan", "email2": "kevin.sebichai@ug.edu.ec", "fecha": "2026-08-21"}]}, {"tutor": "Palacios Portes Carlos", "email": "palaciospc@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Carvache Ullauri Emily Desiree", "email1": "emily.carvache@ug.edu.ec", "est2": "Muñoz Cordova Gustavo Josue", "email2": "gustavo.munozc@ug.edu.ec", "fecha": "2026-06-03"}, {"tipo": "GRUPAL", "est1": "Navarro Cerezo Ester Micaela", "email1": "ester.navarro@ug.edu.ec", "est2": "Pin Conforme Michelly Stefania", "email2": "michelly.pin@ug.edu.ec", "fecha": "2026-06-05"}]}, {"tutor": "Pazmino Franco Carlos Cristobal", "email": "carlos.pazminof@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Rios Cueva Daniela Paulina", "email1": "daniela.rios@ug.edu.ec", "est2": "Tinoco Chamba Maria Fernanda", "email2": "maria.tinoco@ug.edu.ec", "fecha": "2026-06-02"}, {"tipo": "GRUPAL", "est1": "Nuñez Palma Karla Paola", "email1": "karla.nunez@ug.edu.ec", "est2": "Segarra Blacio Naomi Shelyn", "email2": "naomi.segarra@ug.edu.ec", "fecha": "2026-06-02"}]}, {"tutor": "Pazmiño Santamaria Maria Fernanda", "email": "maria.pazminos@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Quimi Bohorquez Oswaldo Henry", "email": "oswaldo.quimib@ug.edu.ec", "n": 1, "estado": "medio", "trabajos": [{"tipo": "INDIVIDUAL", "est1": "Moreira Bacusoy Eddie Emilio", "email1": "eddie.moreirab@ug.edu.ec", "est2": "", "email2": null, "fecha": "2026-08-14"}]}, {"tutor": "Rivadeneira Rodriguez Maria Veronica", "email": "maria.rivadeneirarod@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Romero Jara Maria Isabel", "email": "maria.romeroj@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Saavedra Robles Lileana Carolina", "email": "lileana.saavedrar@ug.edu.ec", "n": 1, "estado": "medio", "trabajos": [{"tipo": "GRUPAL", "est1": "Pozo Ruiz Diego Moises", "email1": "diego.pozo@ug.edu.ec", "est2": "Vera Moran Madelaine", "email2": "madelaine.vera@ug.edu.ec", "fecha": "2026-07-15"}]}, {"tutor": "Saltos Espinoza Luis Alfonso", "email": "luis.saltose@ug.edu.ec", "n": 1, "estado": "medio", "trabajos": [{"tipo": "GRUPAL", "est1": "Diaz Suarez Maria Paula", "email1": "maria.diaz@ug.edu.ec", "est2": "Quijije Zambrano Paul Eduardo", "email2": "paul.quijije@ug.edu.ec", "fecha": "2026-08-13"}]}, {"tutor": "Salvador Minuche Maria Andrea", "email": "maria.salvadormi@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Sanchez Padilla Maria Lorena", "email": "maria.sanchezpa@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Ayo Macias Erick Jhosue", "email1": "erick.ayom@ug.edu.ec", "est2": "Largacha Alman Maria Cecilia", "email2": "maria.largacha@ug.edu.ec", "fecha": "2026-06-02"}, {"tipo": "GRUPAL", "est1": "Alarcon Carrion Erika Karina", "email1": "erika.alarconc@ug.edu.ec", "est2": "Perez Suarez Paula Domenica", "email2": "paula.perez@ug.edu.ec", "fecha": "2026-06-03"}]}, {"tutor": "Sandoval Baquerizo Bolivar Omar", "email": "bolivar.sandovalb@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Sandoya Lara Ricardo Andres", "email": "ricardo.sandoyal@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Seis Mendoza Luis Amando", "email": "luis.seism@ug.edu.ec", "n": 1, "estado": "medio", "trabajos": [{"tipo": "INDIVIDUAL", "est1": "Baque Bermudez Edwin Javier", "email1": "edwin.baqueb@ug.edu.ec", "est2": "", "email2": null, "fecha": "2026-08-18"}]}, {"tutor": "Suco Valle Carlos Andres", "email": "carlos.sucov@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Astudillo Farias Fatima Maria", "email1": "fatima.astudillo@ug.edu.ec", "est2": "Gomez Guerrero Daniella Jamilet", "email2": "daniella.gomez@ug.edu.ec", "fecha": "2026-06-02"}, {"tipo": "GRUPAL", "est1": "Burgos Giler Noemi Alexandra", "email1": "noemi.burgos@ug.edu.ec", "est2": "Pazmino Mendoza Jefferson Joel", "email2": "jefferson.pazmino@ug.edu.ec", "fecha": "2026-06-11"}]}, {"tutor": "Torres Del Salto Rommy Adelfa", "email": "rommy.torres@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Torres Espinoza Juan Carlos", "email": "juan.torreses@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Torres Ruilova Bismark Osmany", "email": "bismark.torresr@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Valencia Avellan Daniela Del Rosario", "email": "daniela.valenciaav@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Huayamave Villarreal Nadya Sare", "email1": "nadya.huayamave@ug.edu.ec", "est2": "Morocho Santisteban Sebastian Antonio", "email2": "sebastian.morocho@ug.edu.ec", "fecha": "2026-06-02"}, {"tipo": "GRUPAL", "est1": "Yagual Montece Iliana Priscilla", "email1": "iliana.yagual@ug.edu.ec", "est2": "Yagual Montece Allisson Priscilla", "email2": "allisson.yagual@ug.edu.ec", "fecha": "2026-06-03"}]}, {"tutor": "Valencia Robles Ricardo Andres", "email": "ricardo.valenciar@ug.edu.ec", "n": 0, "estado": "libre", "trabajos": []}, {"tutor": "Vega Verduga Jorge Alberto", "email": "jorge.vegav@ug.edu.ec", "n": 2, "estado": "completo", "trabajos": [{"tipo": "GRUPAL", "est1": "Aviles Merchan Silmic Shary", "email1": "silmic.aviles@ug.edu.ec", "est2": "Paccha Medina Nicole Jacqueline", "email2": "nicole.paccha@ug.edu.ec", "fecha": "2026-06-02"}, {"tipo": "GRUPAL", "est1": "Vasquez Cruz Victor Manuel", "email1": "victor.vasquezcr@ug.edu.ec", "est2": "Suarez Piloco James Pierre", "email2": "james.suarez@ug.edu.ec", "fecha": "2026-07-27"}]}, {"tutor": "Velez Aspiazu Eva Esther", "email": "eva.veleza@ug.edu.ec", "n": 1, "estado": "medio", "trabajos": [{"tipo": "GRUPAL", "est1": "Rodriguez Rodriguez Ronald Gabriel", "email1": "ronald.rodrigue@ug.edu.ec", "est2": "Cabezas Vaca Jose Alejandro", "email2": "jose.cabezasv@ug.edu.ec", "fecha": "2026-08-13"}]}, {"tutor": "Vidal Pizarro Katherine Cumanda", "email": "katherine.vidalpi@ug.edu.ec", "n": 1, "estado": "medio", "trabajos": [{"tipo": "GRUPAL", "est1": "Parrales Vergara Maria Belen", "email1": "maria.parrales@ug.edu.ec", "est2": "Sandoval Idrovo Tatiana Del Carmen", "email2": "tatiana.sandoval@ug.edu.ec", "fecha": "2026-07-20"}]}, {"tutor": "Yepez Quintana Mario William", "email": "mario.yepezqui@ug.edu.ec", "n": 1, "estado": "medio", "trabajos": [{"tipo": "GRUPAL", "est1": "Valencia Barcenas Victor Hugo", "email1": "victor.valenciab@ug.edu.ec", "est2": "Sanchez Huaraca Jefferson Daniel", "email2": "jefferson.sanchezh@ug.edu.ec", "fecha": "2026-06-02"}]}];
+const PENDIENTES = [{"nombre": "Chaguay Veliz Oswaldo Jesus", "email": null, "situacion": "Repite periodo - probablemente cambia de tutor"}, {"nombre": "Lema Naula Jorge Alonso", "email": "jorge.leman@ug.edu.ec", "situacion": "Repite periodo - probablemente cambia de tutor"}, {"nombre": "Moran Gonzalez Jonathan Jackson", "email": "jonathan.moran@ug.edu.ec", "situacion": "Repite periodo - probablemente cambia de tutor"}, {"nombre": "Muñoz Fuyar Joao Enrique", "email": null, "situacion": "Repite periodo - probablemente cambia de tutor"}, {"nombre": "Jaramillo Almendariz Nestor Patricio", "email": "nestor.jaramilloa@ug.edu.ec", "situacion": "Repite periodo - puede continuar con el mismo tutor"}, {"nombre": "Pardo Torres Diego Alberto", "email": "diego.pardo@ug.edu.ec", "situacion": "Repite periodo - puede continuar con el mismo tutor"}, {"nombre": "Rueda Yovera Angel Federico", "email": "angel.rueday@ug.edu.ec", "situacion": "Repite periodo - puede continuar con el mismo tutor"}, {"nombre": "Arteaga Baque Carla Katherine", "email": "carla.arteaga@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Barreto Velez Kerlly Solange", "email": "kerlly.barreto@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Betancourt Pazmiño Gabriel Alejandro", "email": "gabriel.betancourt@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Capa Sarango William Patricio", "email": "william.capa@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Castro Zambrano John Steven", "email": "john.castro@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Espinoza Laines Alfonso De Jesus", "email": "alfonso.espinoza@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Espinoza Laje Tatiana Pamela", "email": "tatiana.espinozal@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Galdamez Cabezas Juan Carlos", "email": "juan.galdamezc@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Hernandez Apolo Erwin Ernesto", "email": "erwin.hernandez@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Holguin Quijije Katherine Milena", "email": "katherine.holguin@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Jimenez Medina Ambar Graciela", "email": "ambar.jimenezm@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Recalde Arevalo Nestor Andres", "email": "nestor.recaldea@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "San Miguel Soriano Samyra Domenica", "email": "samyra.sanmiguels@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Velez Andrade Jefferson Ariel", "email": "jefferson.velez@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Asencio Dueñas Denisse Arianna", "email": "denisse.asencio@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Bejeguen Ordoñez Daniela Anahi", "email": "daniela.bejeguen@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Cobos Garcia Maylin Fernanda", "email": "maylin.cobos@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Huayamave Vera Lissette Geovanna", "email": "lissette.huayamave@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Nuñez Tinoco Cristina Michelle", "email": "cristina.nunez@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Peñafiel Indio Job Leonardo", "email": "job.penafiel@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Quiroz Luna Dustin Ariam", "email": "dustin.quiroz@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Rodriguez Jurado Tony Shachary", "email": "tony.rodriguezj@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Santana Pillasagua Kerly Gabriela", "email": "kerly.santana@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Tobar Tello Damaris Noemi", "email": "damaris.tobar@ug.edu.ec", "situacion": "Apto para titulacion - aun sin tutor"}, {"nombre": "Troya Quimi Jordy Joel", "email": null, "situacion": "Retiro voluntario semestre anterior - vuelve a cursar, pendiente asignar tutor"}];
+
+const grid = document.getElementById('grid');
+const search = document.getElementById('search');
+const filters = document.getElementById('filters');
+const resultCount = document.getElementById('result-count');
+let currentFilter = 'todos';
+
+function escapeHtml(s) {
+  return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function statusLabel(estado) {
+  return estado === 'completo' ? 'Completo' : estado === 'medio' ? '1 de 2' : 'Disponible';
+}
+
+function pillText(t) {
+  return t.n + ' / 2';
+}
+
+function jobHtml(job) {
+  const students = job.est1 ? `
+    <div class="job-students">
+      <div class="s"><span>${escapeHtml(job.est1)}</span><span class="ci">${escapeHtml(job.email1 || '—')}</span></div>
+      ${job.est2 ? `<div class="s"><span>${escapeHtml(job.est2)}</span><span class="ci">${escapeHtml(job.email2 || '—')}</span></div>` : ''}
+    </div>` : '';
+  return `
+    <div class="job">
+      <div class="job-top">
+        <span class="job-type">${escapeHtml(job.tipo || '—')}</span>
+        <span class="job-date">${escapeHtml(job.fecha || '')}</span>
+      </div>
+      ${students}
+    </div>`;
+}
+
+function cardHtml(t) {
+  const body = t.trabajos.length
+    ? t.trabajos.map(jobHtml).join('')
+    : '<div class="empty-slot">Sin solicitudes registradas — 2 cupos disponibles.</div>';
+  return `
+    <div class="card" data-status="${t.estado}" data-name="${escapeHtml(t.tutor.toLowerCase())}" data-students="${escapeHtml(t.trabajos.map(j => (j.est1 + ' ' + j.est2)).join(' ').toLowerCase())}">
+      <div class="card-head" onclick="this.parentElement.classList.toggle('open')">
+        <div class="card-id">
+          <div class="card-name">${escapeHtml(t.tutor)}</div>
+          <div class="card-email">${escapeHtml(t.email)}</div>
+        </div>
+        <div class="card-right">
+          <span class="pill ${t.estado}">${pillText(t)}</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+      </div>
+      <div class="card-body">${body}</div>
+    </div>`;
+}
+
+function render() {
+  const q = search.value.trim().toLowerCase();
+  const filtered = DATA.filter(t => {
+    if (currentFilter !== 'todos' && t.estado !== currentFilter) return false;
+    if (q) {
+      const haystack = t.tutor.toLowerCase() + ' ' + t.trabajos.map(j => j.est1 + ' ' + j.est2).join(' ').toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+    return true;
+  });
+
+  grid.innerHTML = filtered.length
+    ? filtered.map(cardHtml).join('')
+    : '<div class="no-results">Sin resultados para esa búsqueda.</div>';
+
+  resultCount.textContent = filtered.length === DATA.length
+    ? `Mostrando los ${DATA.length} tutores`
+    : `Mostrando ${filtered.length} de ${DATA.length} tutores`;
+}
+
+filters.addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  filters.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = btn.dataset.filter;
+  render();
+});
+
+search.addEventListener('input', render);
+
+document.getElementById('jump-pending').addEventListener('click', () => {
+  const section = document.getElementById('pending-section');
+  section.classList.add('open');
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+function renderPending() {
+  const tbody = document.getElementById('pending-tbody');
+  tbody.innerHTML = PENDIENTES.map(p => `
+    <tr>
+      <td>${escapeHtml(p.nombre)}</td>
+      <td class="p-email">${escapeHtml(p.email || '—')}</td>
+      <td class="p-sit">${escapeHtml(p.situacion)}</td>
+    </tr>`).join('');
+  document.getElementById('pending-count').textContent = PENDIENTES.length + ' estudiantes';
+  document.getElementById('kpi-pendientes').textContent = PENDIENTES.length;
+  document.getElementById('jump-pending-label').textContent = `Sin tutor (${PENDIENTES.length})`;
+}
+
+function renderKpis() {
+  const total = DATA.length;
+  const completo = DATA.filter(t => t.estado === 'completo').length;
+  const medio = DATA.filter(t => t.estado === 'medio').length;
+  const libre = DATA.filter(t => t.estado === 'libre').length;
+
+  document.getElementById('kpi-tutores').textContent = total;
+  document.getElementById('kpi-completo').textContent = completo;
+  document.getElementById('kpi-medio').textContent = medio;
+  document.getElementById('kpi-libre').textContent = libre;
+
+  document.getElementById('f-todos').textContent = `Todos (${total})`;
+  document.getElementById('f-completo').textContent = `Completo (${completo})`;
+  document.getElementById('f-medio').textContent = `Parcial (${medio})`;
+  document.getElementById('f-libre').textContent = `Disponible (${libre})`;
+
+  const cuposTotales = total * 2;
+  const trabajosCompleto = DATA.filter(t => t.estado === 'completo').reduce((s, t) => s + t.n, 0);
+  const trabajosMedio = DATA.filter(t => t.estado === 'medio').reduce((s, t) => s + t.n, 0);
+  const ocupados = trabajosCompleto + trabajosMedio;
+  const libresCupos = cuposTotales - ocupados;
+
+  document.getElementById('cap-summary').textContent = `${ocupados} / ${cuposTotales} cupos ocupados`;
+  document.getElementById('b-completo').style.width = (trabajosCompleto / cuposTotales * 100).toFixed(1) + '%';
+  document.getElementById('b-medio').style.width = (trabajosMedio / cuposTotales * 100).toFixed(1) + '%';
+  document.getElementById('b-libre').style.width = (libresCupos / cuposTotales * 100).toFixed(1) + '%';
+}
+
+document.getElementById('generated').textContent =
+  'Generado ' + new Date().toLocaleDateString('es-EC', { day: 'numeric', month: 'long', year: 'numeric' });
+
+renderKpis();
+render();
+renderPending();
+</script>
