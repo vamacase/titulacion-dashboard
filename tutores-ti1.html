@@ -813,6 +813,9 @@
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-solicitar { color: #0A111A; } }
   :root[data-theme="dark"] .btn-solicitar { color: #0A111A; }
   .btn-solicitar:hover { filter: brightness(1.08); }
+  .btn-contactar-tutor { display: inline-block; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 8px; border: 1.5px solid var(--accent); color: var(--accent); background: transparent; text-decoration: none; white-space: nowrap; }
+  .btn-contactar-tutor:hover { background: var(--line-soft); }
+  .btn-contactar-tutor:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .btn-solicitar:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .copiar { font-family: inherit; font-size: 12px; padding: 3px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg-raised); color: var(--accent); cursor: pointer; }
   .nota-tutor { font-size: 12px; color: var(--ink-faint); }
@@ -834,7 +837,7 @@
     <div class="hd-texto">
     <span class="eyebrow">Titulación · Período 2027‑2028 TI1</span>
     <h1>Cupos de tutores de titulación</h1>
-    <p class="subhead">Cupos de los <span id="sub-tutores">—</span> docentes disponibles como tutores este período, cada uno con capacidad para 2 trabajos de titulación. En la pestaña <b>Docentes y títulos</b> puedes revisar la formación de cada docente antes de elegir tutor. El título del tema provisional debe tener máximo 14 palabras. Cuando el docente acepte, abre su tarjeta y pulsa <b>Solicitar este tutor</b>.</p>
+    <p class="subhead">Cupos de los <span id="sub-tutores">—</span> docentes disponibles como tutores este período, cada uno con capacidad para 2 trabajos de titulación. En la pestaña <b>Docentes y títulos</b> puedes revisar la formación de cada docente antes de elegir tutor. El título del tema provisional debe tener máximo 14 palabras. Cuando el docente acepte, abre su tarjeta y pulsa <b>Registrar como tutor</b>.</p>
     </div>
     <aside class="hd-contacto" aria-label="Responsables del proceso de titulación">
       <div class="resp">
@@ -1066,45 +1069,39 @@ function jobHtml(job) {
 
 const DIRECCION = 'direccionarqfau@ug.edu.ec';
 const GESTORA_TITULACION = 'daniela.valenciaav@ug.edu.ec';  // siempre en copia
+// Textos de los correos de los botones: se editan en 3.0-Tutores/plantillas_correos/botones/*.txt
+const PLANTILLAS_MAIL = {"contactar_estudiantes": {"asunto": "Tutoría de titulación 2027-2028 TI1: interés en su tema provisional", "cuerpo": "{{#if grupal}}Estimados estudiantes:{{#else}}Estimado(a) estudiante:{{/if}}\n\nReciban un cordial saludo.\n\nSoy docente de la Carrera de Arquitectura. En el dashboard de tutores de Titulación 2027-2028 TI1 vi que {{#if grupal}}ustedes propusieron{{#else}}usted propuso{{/if}} el siguiente tema provisional:\n\n   «{{tema}}»\n\nMe interesa conversar sobre la posibilidad de tutorizar este trabajo. ¿Podrían indicarme un día y una hora para reunirnos (presencial o virtual) en los próximos días?\n\nSi ambas partes están de acuerdo, el siguiente paso es que {{#if grupal}}ustedes envíen{{#else}}usted envíe{{/if}} la solicitud desde el botón «Registrar como tutor» del dashboard, con copia a mi correo, para que la Dirección de Carrera registre la tutoría.\n\nQuedo atento(a) a su respuesta.\n\nSaludos cordiales,\n[Escriba aquí su nombre y título]"}, "contactar_tutor": {"asunto": "Consulta de tutoría de titulación 2027-2028 TI1", "cuerpo": "Estimado(a) docente:\n\nReciba un cordial saludo.\n\nSoy estudiante de la Carrera de Arquitectura y me encuentro en el proceso de Titulación 2027-2028 TI1. Revisé el dashboard de tutores y vi que usted figura como tutor disponible, con {{cupos}}.\n\nEl tema provisional que quisiera desarrollar es el siguiente:\n\n   «[Escriba aquí su tema provisional]»\n\nQuisiera solicitarle una cita presencial para conversar sobre mi propuesta y, si usted está de acuerdo, acordar que sea mi tutor de titulación. ¿Podría indicarme un día y una hora que le resulten convenientes?\n\nSi ambos estamos de acuerdo, registraré la tutoría desde el botón «Registrar como tutor» del dashboard.\n\nQuedo atento(a) a su respuesta.\n\nSaludos cordiales,\n[Escriba aquí su nombre completo, cédula y correo institucional]"}, "proponer_tema": {"asunto": "[TEMA TI1] Propuesta de tema provisional", "cuerpo": "Estimado Ing. Vicente Macas Espinosa, MSc.\nDirector de la Carrera de Arquitectura\n\nMediante el presente quiero realizar la propuesta de mi tema provisional para que sea registrado en el dashboard:\n\nPROPUESTA DE TEMA PROVISIONAL\nTitulación 2027-2028 TI1\n\n[ TIPO DE TRABAJO ]\nTipo (Individual o Grupal):{{espacio}}\n\n[ MIS DATOS ]\nMi cédula (10 dígitos):{{espacio}}\nMi nombre completo:{{espacio}}\n\n[ SOLO SI ES GRUPAL ]\nCédula del compañero(a):{{espacio}}\nNombre del compañero(a):{{espacio}}\n\n[ TEMA ]\nTítulo del tema (máximo 14 palabras):{{espacio}}\n\nAutorizo que mi nombre, correo institucional y tema se publiquen en el dashboard de tutores para que los docentes puedan contactarme.\n\n----------------------------------------\nAntes de enviar:\n  1. Envíelo desde su correo institucional @ug.edu.ec.\n  2. Si el tema es grupal, envíelo una sola vez con copia a su compañero(a).\n  3. No cambie los nombres de los campos ni borre los dos puntos."}, "solicitar_tutor": {"asunto": "[TUTORÍA TI1] {{tutor}}", "cuerpo": "Estimado Ing. Vicente Macas Espinosa, MSc.\nDirector de la Carrera de Arquitectura\n\nMediante el presente quiero indicar que he coordinado con el docente y me ha aceptado ser mi tutor de titulación para el período académico 2027-2028 TI1, por lo tanto quiero registrar el siguiente acuerdo de tutoría:\n\n\nSOLICITUD DE REGISTRO DE TUTOR\nTitulación 2027-2028 TI1\n\n[ TUTOR ELEGIDO ]\nTutor: {{tutor}}\n\n[ TIPO DE TRABAJO ]\nTipo (Individual o Grupal):{{espacio}}\n\n[ MIS DATOS ]\nMi cédula (10 dígitos):{{espacio}}\nMi nombre completo:{{espacio}}\n\n[ SOLO SI ES GRUPAL ]\nCédula del compañero(a):{{espacio}}\nNombre del compañero(a):{{espacio}}\n\n[ TEMA PROVISIONAL (opcional) ]\nTema provisional (máximo 14 palabras):{{espacio}}\n\nDeclaro que conversé con el docente y que aceptó ser mi tutor.\n\n----------------------------------------\nAntes de enviar:\n  1. Envíelo desde su correo institucional @ug.edu.ec.\n  2. No cambie los nombres de los campos ni borre los dos puntos.\n  3. El correo va con copia al docente y a la Gestora de Titulación."}};
+
+function llenarPlantilla(txt, v) {
+  return txt
+    .replace(/\{\{#if (\w+)\}\}([\s\S]*?)(?:\{\{#else\}\}([\s\S]*?))?\{\{\/if\}\}/g, (m, c, a, b) => (v[c] ? a : (b || '')))
+    .replace(/\{\{(\w+)\}\}/g, (m, k) => (k in v ? v[k] : m));
+}
+
+function correoDePlantilla(nombre, v) {
+  const p = PLANTILLAS_MAIL[nombre];
+  v = { espacio: ' ', ...v };
+  return { asunto: llenarPlantilla(p.asunto, v), cuerpo: llenarPlantilla(p.cuerpo, v).replace(/\n/g, '\r\n') };
+}
 
 function mailtoTutor(t) {
-  const cuerpo = [
-    'SOLICITUD DE REGISTRO DE TUTOR',
-    'Titulación 2027-2028 TI1',
-    '',
-    '[ TUTOR ELEGIDO ]',
-    `Tutor: ${t.tutor}`,
-    '',
-    '[ TIPO DE TRABAJO ]',
-    'Tipo (Individual o Grupal): ',
-    '',
-    '[ MIS DATOS ]',
-    'Mi cédula (10 dígitos): ',
-    'Mi nombre completo: ',
-    '',
-    '[ SOLO SI ES GRUPAL ]',
-    'Cédula del compañero(a): ',
-    'Nombre del compañero(a): ',
-    '',
-    '[ TEMA PROVISIONAL (opcional) ]',
-    'Tema provisional (máximo 14 palabras): ',
-    '',
-    '----------------------------------------',
-    'Antes de enviar:',
-    '  1. Envíelo desde su correo institucional @ug.edu.ec.',
-    '  2. No cambie los nombres de los campos ni borre los dos puntos.',
-    '  3. El correo va con copia al docente y a la Gestora de Titulación.',
-    '',
-    'Declaro que conversé con el docente y que aceptó ser mi tutor.',
-  ].join('\r\n');
+  const c = correoDePlantilla('solicitar_tutor', { tutor: t.tutor });
   return `mailto:${DIRECCION}?cc=${[t.email, GESTORA_TITULACION].filter(Boolean).map(encodeURIComponent).join(',')}`
-    + `&subject=${encodeURIComponent('[TUTORÍA TI1] ' + t.tutor)}&body=${encodeURIComponent(cuerpo)}`;
+    + `&subject=${encodeURIComponent(c.asunto)}&body=${encodeURIComponent(c.cuerpo)}`;
+}
+
+function mailtoContactarTutor(t) {
+  const libres = Math.max(0, 2 - t.trabajos.length);
+  const c = correoDePlantilla('contactar_tutor', { tutor: t.tutor, cupos: libres === 1 ? '1 cupo disponible' : libres + ' cupos disponibles' });
+  return `mailto:${t.email}?cc=${encodeURIComponent(GESTORA_TITULACION + ',' + DIRECCION)}`
+    + `&subject=${encodeURIComponent(c.asunto)}&body=${encodeURIComponent(c.cuerpo)}`;
 }
 
 function solicitarHtml(t) {
   if (t.estado === 'completo') return '<div class="solicitar sin-cupo">Este tutor ya no tiene cupos disponibles.</div>';
-  return `<div class="solicitar"><a class="btn-solicitar" href="${mailtoTutor(t)}">Solicitar este tutor</a>
-    <span>Antes conversa con el docente y confirma que acepta. Se abrirá un correo con el docente y la Gestora de Titulación en copia: completa tus datos y envíalo desde tu correo @ug.edu.ec. El título del tema provisional debe tener <b>máximo 14 palabras</b>.</span></div>`;
+  const contactar = t.email ? `<a class="btn-contactar-tutor" href="${mailtoContactarTutor(t)}">Contactar a este tutor</a>` : '';
+  return `<div class="solicitar">${contactar}<a class="btn-solicitar" href="${mailtoTutor(t)}">Registrar como tutor</a>
+    <span><b>1.</b> Contáctalo para acordar una cita y conversar tu tema. <b>2.</b> Cuando acepte ser tu tutor, regístralo: se abrirá un correo con el docente y la Gestora de Titulación en copia; completa tus datos y envíalo desde tu correo @ug.edu.ec. El título del tema provisional debe tener <b>máximo 14 palabras</b>.</span></div>`;
 }
 
 function cardHtml(t) {
@@ -1178,60 +1175,16 @@ function renderPending() {
 }
 
 function mailtoProponerTema() {
-  const cuerpo = [
-    'PROPUESTA DE TEMA PROVISIONAL',
-    'Titulación 2027-2028 TI1',
-    '',
-    '[ TIPO DE TRABAJO ]',
-    'Tipo (Individual o Grupal): ',
-    '',
-    '[ MIS DATOS ]',
-    'Mi cédula (10 dígitos): ',
-    'Mi nombre completo: ',
-    '',
-    '[ SOLO SI ES GRUPAL ]',
-    'Cédula del compañero(a): ',
-    'Nombre del compañero(a): ',
-    '',
-    '[ TEMA ]',
-    'Título del tema (máximo 14 palabras): ',
-    '',
-    '----------------------------------------',
-    'Antes de enviar:',
-    '  1. Envíelo desde su correo institucional @ug.edu.ec.',
-    '  2. Si el tema es grupal, envíelo una sola vez con copia a su compañero(a).',
-    '  3. No cambie los nombres de los campos ni borre los dos puntos.',
-    '',
-    'Autorizo que mi nombre, correo institucional y tema se publiquen en el dashboard de tutores para que los docentes puedan contactarme.',
-  ].join('\r\n');
+  const c = correoDePlantilla('proponer_tema', {});
   return `mailto:${DIRECCION}?cc=${encodeURIComponent(GESTORA_TITULACION)}`
-    + `&subject=${encodeURIComponent('[TEMA TI1] Propuesta de tema provisional')}&body=${encodeURIComponent(cuerpo)}`;
+    + `&subject=${encodeURIComponent(c.asunto)}&body=${encodeURIComponent(c.cuerpo)}`;
 }
 
 function mailtoContactar(t) {
   const para = t.estudiantes.map(e => e.email).filter(Boolean).join(',');
-  const grupal = t.estudiantes.length > 1;
-  const asunto = `Tutoría de titulación 2027-2028 TI1: interés en su tema provisional`;
-  const cuerpo = [
-    grupal ? 'Estimados estudiantes:' : 'Estimado(a) estudiante:',
-    '',
-    'Reciban un cordial saludo.',
-    '',
-    'Soy docente de la Carrera de Arquitectura. En el dashboard de tutores de Titulación 2027-2028 TI1 vi que ' + (grupal ? 'ustedes propusieron' : 'usted propuso') + ' el siguiente tema provisional:',
-    '',
-    `   «${t.tema}»`,
-    '',
-    'Me interesa conversar sobre la posibilidad de tutorizar este trabajo. ¿Podrían indicarme un día y una hora para reunirnos (presencial o virtual) en los próximos días?',
-    '',
-    'Si ambas partes están de acuerdo, el siguiente paso es que ' + (grupal ? 'ustedes envíen' : 'usted envíe') + ' la solicitud desde el botón «Solicitar este tutor» del dashboard, con copia a mi correo, para que la Dirección de Carrera registre la tutoría.',
-    '',
-    'Quedo atento(a) a su respuesta.',
-    '',
-    'Saludos cordiales,',
-    '[Escriba aquí su nombre y título]',
-  ].join('\r\n');
+  const c = correoDePlantilla('contactar_estudiantes', { tema: t.tema, grupal: t.estudiantes.length > 1 });
   return `mailto:${para}?cc=${encodeURIComponent(DIRECCION + ',' + GESTORA_TITULACION)}`
-    + `&subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+    + `&subject=${encodeURIComponent(c.asunto)}&body=${encodeURIComponent(c.cuerpo)}`;
 }
 function renderTemas() {
   const q = norm(document.getElementById('temas-q').value).trim().split(/\s+/).filter(Boolean);
