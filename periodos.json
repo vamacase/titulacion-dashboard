@@ -1,4 +1,15 @@
 {
-  "actual": "2026-2027-ti1",
-  "periodos": [{"id": "2026-2027-ti1", "etiqueta": "2026 - 2027 TI1", "archivo": "dashboard-2026-2027-ti1.html"}]
+  "actual": "2026-2027-ti2",
+  "periodos": [
+    {
+      "id": "2026-2027-ti2",
+      "etiqueta": "2026 - 2027 TI2",
+      "archivo": "dashboard-2026-2027-ti2.html"
+    },
+    {
+      "id": "2026-2027-ti1",
+      "etiqueta": "2026 - 2027 TI1",
+      "archivo": "dashboard-2026-2027-ti1.html"
+    }
+  ]
 }
