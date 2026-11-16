@@ -77,13 +77,13 @@ function compactLabel(value) {
 <body>
 <header>
   <h1>Dashboard Titulacion FAU-UG</h1>
-  <div class="meta">Periodo: 2026 - 2027 TI2 &nbsp;|&nbsp; Semana 5 &nbsp;|&nbsp; Actualizado: 13/11/2026 08:34</div>
+  <div class="meta">Periodo: 2026 - 2027 TI2 &nbsp;|&nbsp; Semana 5 &nbsp;|&nbsp; Actualizado: 15/11/2026 20:11</div>
 </header>
 <nav><a href="#kpis">Resumen</a><a href="#pendientes">Pendientes</a><a href="#retraso">Avance</a><a href="#baja">Baja asistencia</a><a href="#notas">Notas</a><a href="#retiros">Retiros</a></nav>
-<main><div class="filter-bar"><label for="filtro-carrera">Carrera</label><select id="filtro-carrera"><option value="todas">Todas las carreras</option><option value="c1">ARQUITECTURA (SEMESTRAL)</option><option value="c2">ARQUITECTURA-2018</option></select></div><div class="dashboard-panel" data-scope="todas"><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">116</div><div class="kpi-label">Estudiantes activos</div><div class="kpi-sub">de 117 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">1</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">1% de matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">19</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">16% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">115</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">99% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">5</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<main><div class="filter-bar"><label for="filtro-carrera">Carrera</label><select id="filtro-carrera"><option value="todas">Todas las carreras</option><option value="c1">ARQUITECTURA (SEMESTRAL)</option><option value="c2">ARQUITECTURA-2018</option></select></div><div class="dashboard-panel" data-scope="todas"><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">116</div><div class="kpi-label">Estudiantes activos</div><div class="kpi-sub">de 117 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">1</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">1% de matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">2</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">2% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">116</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">100% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">5</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes">
 <h2>Tutores con asistencia pendiente
-  <span class="badge badge-danger">3 tutores &middot; 20 registros pendientes</span>
+  <span class="badge badge-danger">2 tutores &middot; 2 registros pendientes</span>
 </h2>
 <div class="chart-scroll">
   <div class="chart-wrap" style="height:400px">
@@ -94,10 +94,10 @@ function compactLabel(value) {
 new Chart(document.getElementById('chart-pendientes'), {
   type: 'bar',
   data: {
-    labels: ["SEIS MENDOZA LUIS AMANDO", "VIDAL PIZARRO KATHERINE CUMANDA", "YEPEZ QUINTANA MARIO WILLIAM"],
+    labels: ["SEIS MENDOZA LUIS AMANDO", "VIDAL PIZARRO KATHERINE CUMANDA"],
     datasets: [{
       label: 'Estudiantes sin asistencia',
-      data: [1, 1, 2],
+      data: [1, 1],
       backgroundColor: '#dc2626',
       borderColor: '#991b1b',
       borderWidth: 1,
@@ -128,10 +128,10 @@ new Chart(document.getElementById('chart-pendientes'), {
 </section>
 <section id="retraso">
 <h2>Docentes con avance inferior a la semana 5
-  <span class="badge badge-warn">28 docentes</span>
+  <span class="badge badge-warn">26 docentes</span>
 </h2>
 <div class="chart-scroll">
-  <div class="chart-wrap" style="height:784px">
+  <div class="chart-wrap" style="height:728px">
     <canvas id="chart-retraso" aria-label="Grafico de barras: docentes con avance inferior a la semana actual" role="img"></canvas>
   </div>
 </div>
@@ -139,10 +139,10 @@ new Chart(document.getElementById('chart-pendientes'), {
 new Chart(document.getElementById('chart-retraso'), {
   type: 'bar',
   data: {
-    labels: ["CAMPOVERDE RIVERA CINDY ESTHER", "DELGADO CRUZ AIMEE DEL ROCÍO", "FORERO FUENTES BORIS ANDREI", "GOMEZ LUGO EDMUNDO JAVIER", "ECHEVERRIA MAGGI EDDIE EFRÉN", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "CUENCA MARQUEZ CESAR ARTURO", "GUERRERO VALVERDE GABRIELA CRISTINA", "MORALES COBOS SUSY GREY", "SAAVEDRA ROBLES LILEANA CAROLINA", "ZAMBRANO GOMEZ JUAN CARLOS", "VEGA VERDUGA JORGE ALBERTO", "SANCHEZ PADILLA MARIA LORENA", "PALACIOS PORTES CARLOS", "GUERRERO FERRECCIO CARLOS AUGUSTO", "ORTEGA ASTUDILLO ROSA LETICIA", "MITE HOLGUIN EVELYN RUTH", "SALTOS ESPINOZA LUIS ALFONSO", "QUIMI BOHORQUEZ OSWALDO HENRY", "VIDAL PIZARRO KATHERINE CUMANDA", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "MUÑOZ SALAZAR FRANS JHASMANY", "BUÑAY CAMBA DANIEL ALEXANDER", "ROMERO JARA MARIA ISABEL", "MORA ALVARADO ENRIQUE ALEJANDRO", "TORRES ESPINOZA JUAN CARLOS", "ARAUZ VILLAFUERTE JOFFRE FABIAN"],
+    labels: ["SAAVEDRA ROBLES LILEANA CAROLINA", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "MORALES COBOS SUSY GREY", "GUERRERO VALVERDE GABRIELA CRISTINA", "CAMPOVERDE RIVERA CINDY ESTHER", "DELGADO CRUZ AIMEE DEL ROCÍO", "ZAMBRANO GOMEZ JUAN CARLOS", "GOMEZ LUGO EDMUNDO JAVIER", "ECHEVERRIA MAGGI EDDIE EFRÉN", "VEGA VERDUGA JORGE ALBERTO", "CUENCA MARQUEZ CESAR ARTURO", "MUÑOZ SALAZAR FRANS JHASMANY", "PALACIOS PORTES CARLOS", "VIDAL PIZARRO KATHERINE CUMANDA", "QUIMI BOHORQUEZ OSWALDO HENRY", "GUERRERO FERRECCIO CARLOS AUGUSTO", "MITE HOLGUIN EVELYN RUTH", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "ORTEGA ASTUDILLO ROSA LETICIA", "ROMERO JARA MARIA ISABEL", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "BUÑAY CAMBA DANIEL ALEXANDER", "SANCHEZ PADILLA MARIA LORENA", "MORA ALVARADO ENRIQUE ALEJANDRO", "TORRES ESPINOZA JUAN CARLOS", "ARAUZ VILLAFUERTE JOFFRE FABIAN"],
     datasets: [{
       label: 'Ultima semana registrada',
-      data: [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.2, 4.666666666666667, 4.75],
+      data: [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.2, 4.666666666666667, 4.916666666666667],
       backgroundColor: '#f97316',
       borderColor: '#c2410c',
       borderWidth: 1,
@@ -183,13 +183,13 @@ new Chart(document.getElementById('chart-retraso'), {
 </section>
 <section id="baja">
 <h2>Baja asistencia (&lt;70%)
-  <span class="badge badge-danger">209 registros de tutoria</span>
+  <span class="badge badge-danger">227 registros de tutoria</span>
 </h2>
 <div class="two-col">
   <div>
     <h3>Tutores con mayor cantidad de estudiantes criticos</h3>
     <div class="chart-scroll">
-      <div class="chart-wrap" style="height:1148px">
+      <div class="chart-wrap" style="height:1176px">
         <canvas id="chart-baja-tutor" aria-label="Grafico de barras: tutores con mayor cantidad de estudiantes en estado critico" role="img"></canvas>
       </div>
     </div>
@@ -197,7 +197,7 @@ new Chart(document.getElementById('chart-retraso'), {
   <div>
     <h3>Distribucion de porcentajes de asistencia</h3>
     <div class="chart-scroll">
-      <div class="chart-wrap" style="height:1148px">
+      <div class="chart-wrap" style="height:1176px">
         <canvas id="chart-dist" aria-label="Histograma: distribucion de porcentajes de asistencia de estudiantes" role="img"></canvas>
       </div>
     </div>
@@ -207,10 +207,10 @@ new Chart(document.getElementById('chart-retraso'), {
 new Chart(document.getElementById('chart-baja-tutor'), {
   type: 'bar',
   data: {
-    labels: ["BUSTAMANTE ALARCON WILLIAN FELIPE", "BRIONES MACIAS JUAN CARLOS", "CAMPOVERDE RIVERA CINDY ESTHER", "QUIMI BOHORQUEZ OSWALDO HENRY", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "VALENCIA ROBLES RICARDO ANDRES", "ZAMBRANO GOMEZ JUAN CARLOS", "LUDEÑA ZERDA JORGE FRANKLIN", "MORALES COBOS SUSY GREY", "ORTEGA ASTUDILLO ROSA LETICIA", "SALTOS ESPINOZA LUIS ALFONSO", "ROMERO JARA MARIA ISABEL", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "VELEZ ASPIAZU EVA ESTHER", "GUERRERO FERRECCIO CARLOS AUGUSTO", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "VIDAL PIZARRO KATHERINE CUMANDA", "SAAVEDRA ROBLES LILEANA CAROLINA", "GUERRERO VALVERDE GABRIELA CRISTINA", "MITE HOLGUIN EVELYN RUTH", "GOMEZ LUGO EDMUNDO JAVIER", "BUÑAY CAMBA DANIEL ALEXANDER", "ECHEVERRIA MAGGI EDDIE EFRÉN", "CAMPOVERDE TABARA LAURA MARIEN", "TORRES ESPINOZA JUAN CARLOS", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "SANCHEZ PADILLA MARIA LORENA", "DELGADO CRUZ AIMEE DEL ROCÍO", "CUENCA MARQUEZ CESAR ARTURO", "FORERO FUENTES BORIS ANDREI", "BREVI MARTINEZ VALENTINA", "FLORES BELTRAN PATRICIA KATHERINE", "PALACIOS PORTES CARLOS", "MUÑOZ SALAZAR FRANS JHASMANY", "VEGA VERDUGA JORGE ALBERTO", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "MORA ALVARADO ENRIQUE ALEJANDRO", "SUCO VALLE CARLOS ANDRES", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "PEREZ MATO DAISY DE LA CARIDAD", "CHARA MOREIRA PEDRO NAPOLEÓN"],
+    labels: ["BUSTAMANTE ALARCON WILLIAN FELIPE", "BRIONES MACIAS JUAN CARLOS", "CAMPOVERDE RIVERA CINDY ESTHER", "QUIMI BOHORQUEZ OSWALDO HENRY", "PAZMIÑO SANTAMARIA MARIA FERNANDA", "VALENCIA ROBLES RICARDO ANDRES", "ZAMBRANO GOMEZ JUAN CARLOS", "LUDEÑA ZERDA JORGE FRANKLIN", "MORALES COBOS SUSY GREY", "ORTEGA ASTUDILLO ROSA LETICIA", "ROMERO JARA MARIA ISABEL", "YEPEZ QUINTANA MARIO WILLIAM", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "VELEZ ASPIAZU EVA ESTHER", "GUERRERO FERRECCIO CARLOS AUGUSTO", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "VIDAL PIZARRO KATHERINE CUMANDA", "GUERRERO VALVERDE GABRIELA CRISTINA", "SAAVEDRA ROBLES LILEANA CAROLINA", "MITE HOLGUIN EVELYN RUTH", "GOMEZ LUGO EDMUNDO JAVIER", "BUÑAY CAMBA DANIEL ALEXANDER", "ECHEVERRIA MAGGI EDDIE EFRÉN", "CAMPOVERDE TABARA LAURA MARIEN", "TORRES ESPINOZA JUAN CARLOS", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "DELGADO CRUZ AIMEE DEL ROCÍO", "SANCHEZ PADILLA MARIA LORENA", "CUENCA MARQUEZ CESAR ARTURO", "FORERO FUENTES BORIS ANDREI", "BREVI MARTINEZ VALENTINA", "FLORES BELTRAN PATRICIA KATHERINE", "VEGA VERDUGA JORGE ALBERTO", "MUÑOZ SALAZAR FRANS JHASMANY", "PALACIOS PORTES CARLOS", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "MORA ALVARADO ENRIQUE ALEJANDRO", "SALTOS ESPINOZA LUIS ALFONSO", "SUCO VALLE CARLOS ANDRES", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "PEREZ MATO DAISY DE LA CARIDAD", "CHARA MOREIRA PEDRO NAPOLEÓN"],
     datasets: [{
       label: 'Estudiantes <70%',
-      data: [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 22, 24, 31, 32],
+      data: [1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 18, 22, 24, 31, 32],
       backgroundColor: '#ea580c',
       borderColor: '#9a3412',
       borderWidth: 1,
@@ -242,7 +242,7 @@ new Chart(document.getElementById('chart-dist'), {
     labels: ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "70-80", "80-90", "90-100"],
     datasets: [{
       label: 'Estudiantes',
-      data: [2, 41, 59, 13, 0, 0, 0, 0, 0, 0],
+      data: [2, 35, 65, 14, 0, 0, 0, 0, 0, 0],
       backgroundColor: ctx => {
         const i = ctx.dataIndex;
         if (i < 7) return '#dc2626';
@@ -371,10 +371,10 @@ new Chart(document.getElementById('chart-dist'), {
 </div>
 <p class="hint">Estado "ANULADA" indica que la matricula del estudiante fue anulada: el retiro voluntario es efectivo y el estudiante ya no esta activo en el programa. Un estudiante puede tener varias ordenes (Individual + Grupal); se cuentan por cedula unica.</p>
 </section></div>
-<div class="dashboard-panel" data-scope="c1" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">16</div><div class="kpi-label">Estudiantes activos</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">0</div><div class="kpi-label">Retirados voluntarios</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">16</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">100% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">15</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">94% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">5</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<div class="dashboard-panel" data-scope="c1" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">16</div><div class="kpi-label">Estudiantes activos</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">0</div><div class="kpi-label">Retirados voluntarios</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">1</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">6% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">16</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">100% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">5</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes">
 <h2>Tutores con asistencia pendiente
-  <span class="badge badge-danger">1 tutores &middot; 17 registros pendientes</span>
+  <span class="badge badge-danger">1 tutores &middot; 1 registros pendientes</span>
 </h2>
 <div class="chart-scroll">
   <div class="chart-wrap" style="height:400px">
@@ -474,13 +474,13 @@ new Chart(document.getElementById('chart-retraso-c1'), {
 </section>
 <section id="baja">
 <h2>Baja asistencia (&lt;70%)
-  <span class="badge badge-danger">15 registros de tutoria</span>
+  <span class="badge badge-danger">31 registros de tutoria</span>
 </h2>
 <div class="two-col">
   <div>
     <h3>Tutores con mayor cantidad de estudiantes criticos</h3>
     <div class="chart-scroll">
-      <div class="chart-wrap" style="height:300px">
+      <div class="chart-wrap" style="height:308px">
         <canvas id="chart-baja-tutor-c1" aria-label="Grafico de barras: tutores con mayor cantidad de estudiantes en estado critico" role="img"></canvas>
       </div>
     </div>
@@ -488,7 +488,7 @@ new Chart(document.getElementById('chart-retraso-c1'), {
   <div>
     <h3>Distribucion de porcentajes de asistencia</h3>
     <div class="chart-scroll">
-      <div class="chart-wrap" style="height:300px">
+      <div class="chart-wrap" style="height:308px">
         <canvas id="chart-dist-c1" aria-label="Histograma: distribucion de porcentajes de asistencia de estudiantes" role="img"></canvas>
       </div>
     </div>
@@ -498,10 +498,10 @@ new Chart(document.getElementById('chart-retraso-c1'), {
 new Chart(document.getElementById('chart-baja-tutor-c1'), {
   type: 'bar',
   data: {
-    labels: ["BRIONES MACIAS JUAN CARLOS", "BUSTAMANTE ALARCON WILLIAN FELIPE", "CAMPOVERDE RIVERA CINDY ESTHER", "MITE HOLGUIN EVELYN RUTH", "MORA ALVARADO ENRIQUE ALEJANDRO", "SAAVEDRA ROBLES LILEANA CAROLINA", "MUÑOZ SALAZAR FRANS JHASMANY", "MORALES COBOS SUSY GREY", "ROMERO JARA MARIA ISABEL", "ECHEVERRIA MAGGI EDDIE EFRÉN"],
+    labels: ["BRIONES MACIAS JUAN CARLOS", "BUSTAMANTE ALARCON WILLIAN FELIPE", "CAMPOVERDE RIVERA CINDY ESTHER", "MITE HOLGUIN EVELYN RUTH", "MORA ALVARADO ENRIQUE ALEJANDRO", "SAAVEDRA ROBLES LILEANA CAROLINA", "MUÑOZ SALAZAR FRANS JHASMANY", "MORALES COBOS SUSY GREY", "ROMERO JARA MARIA ISABEL", "ECHEVERRIA MAGGI EDDIE EFRÉN", "SALTOS ESPINOZA LUIS ALFONSO"],
     datasets: [{
       label: 'Estudiantes <70%',
-      data: [1, 1, 1, 1, 1, 1, 2, 2, 2, 3],
+      data: [1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 16],
       backgroundColor: '#ea580c',
       borderColor: '#9a3412',
       borderWidth: 1,
@@ -533,7 +533,7 @@ new Chart(document.getElementById('chart-dist-c1'), {
     labels: ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "70-80", "80-90", "90-100"],
     datasets: [{
       label: 'Estudiantes',
-      data: [2, 7, 3, 3, 0, 0, 0, 0, 0, 0],
+      data: [2, 7, 3, 4, 0, 0, 0, 0, 0, 0],
       backgroundColor: ctx => {
         const i = ctx.dataIndex;
         if (i < 7) return '#dc2626';
@@ -649,10 +649,10 @@ new Chart(document.getElementById('chart-dist-c1'), {
   </script>
 </div></section>
 <section id="retiros"><h2>Retiros voluntarios</h2><p class="ok">Sin registros de retiro en el periodo.</p></section></div>
-<div class="dashboard-panel" data-scope="c2" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">100</div><div class="kpi-label">Estudiantes activos</div><div class="kpi-sub">de 101 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">1</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">1% de matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">3</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">3% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">100</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">100% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">5</div><div class="kpi-label">Semana del periodo</div></div></div></section>
+<div class="dashboard-panel" data-scope="c2" hidden><section id="kpis"><h2>Resumen ejecutivo</h2><div class="kpi-grid"><div class="kpi-card" style="border-top:4px solid #2563eb"><div class="kpi-value" style="color:#2563eb">100</div><div class="kpi-label">Estudiantes activos</div><div class="kpi-sub">de 101 matriculados</div></div><div class="kpi-card" style="border-top:4px solid #6b7280"><div class="kpi-value" style="color:#6b7280">1</div><div class="kpi-label">Retirados voluntarios</div><div class="kpi-sub">1% de matriculados</div></div><div class="kpi-card" style="border-top:4px solid #dc2626"><div class="kpi-value" style="color:#dc2626">1</div><div class="kpi-label">Sin asistencia registrada</div><div class="kpi-sub">1% de activos</div></div><div class="kpi-card" style="border-top:4px solid #ea580c"><div class="kpi-value" style="color:#ea580c">100</div><div class="kpi-label">Asistencia critica &lt;70%</div><div class="kpi-sub">100% de activos</div></div><div class="kpi-card" style="border-top:4px solid #d97706"><div class="kpi-value" style="color:#d97706">0</div><div class="kpi-label">Asistencia en riesgo 70-80%</div><div class="kpi-sub">0% de activos</div></div><div class="kpi-card" style="border-top:4px solid #7c3aed"><div class="kpi-value" style="color:#7c3aed">5</div><div class="kpi-label">Semana del periodo</div></div></div></section>
 <section id="pendientes">
 <h2>Tutores con asistencia pendiente
-  <span class="badge badge-danger">2 tutores &middot; 3 registros pendientes</span>
+  <span class="badge badge-danger">1 tutores &middot; 1 registros pendientes</span>
 </h2>
 <div class="chart-scroll">
   <div class="chart-wrap" style="height:400px">
@@ -663,10 +663,10 @@ new Chart(document.getElementById('chart-dist-c1'), {
 new Chart(document.getElementById('chart-pendientes-c2'), {
   type: 'bar',
   data: {
-    labels: ["SEIS MENDOZA LUIS AMANDO", "YEPEZ QUINTANA MARIO WILLIAM"],
+    labels: ["SEIS MENDOZA LUIS AMANDO"],
     datasets: [{
       label: 'Estudiantes sin asistencia',
-      data: [1, 2],
+      data: [1],
       backgroundColor: '#dc2626',
       borderColor: '#991b1b',
       borderWidth: 1,
@@ -697,10 +697,10 @@ new Chart(document.getElementById('chart-pendientes-c2'), {
 </section>
 <section id="retraso">
 <h2>Docentes con avance inferior a la semana 5
-  <span class="badge badge-warn">24 docentes</span>
+  <span class="badge badge-warn">22 docentes</span>
 </h2>
 <div class="chart-scroll">
-  <div class="chart-wrap" style="height:672px">
+  <div class="chart-wrap" style="height:616px">
     <canvas id="chart-retraso-c2" aria-label="Grafico de barras: docentes con avance inferior a la semana actual" role="img"></canvas>
   </div>
 </div>
@@ -708,10 +708,10 @@ new Chart(document.getElementById('chart-pendientes-c2'), {
 new Chart(document.getElementById('chart-retraso-c2'), {
   type: 'bar',
   data: {
-    labels: ["CUENCA MARQUEZ CESAR ARTURO", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "FORERO FUENTES BORIS ANDREI", "DELGADO CRUZ AIMEE DEL ROCÍO", "GUERRERO VALVERDE GABRIELA CRISTINA", "GOMEZ LUGO EDMUNDO JAVIER", "SAAVEDRA ROBLES LILEANA CAROLINA", "VEGA VERDUGA JORGE ALBERTO", "ZAMBRANO GOMEZ JUAN CARLOS", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "SALTOS ESPINOZA LUIS ALFONSO", "MUÑOZ SALAZAR FRANS JHASMANY", "ORTEGA ASTUDILLO ROSA LETICIA", "QUIMI BOHORQUEZ OSWALDO HENRY", "MITE HOLGUIN EVELYN RUTH", "GUERRERO FERRECCIO CARLOS AUGUSTO", "BUÑAY CAMBA DANIEL ALEXANDER", "SANCHEZ PADILLA MARIA LORENA", "MORA ALVARADO ENRIQUE ALEJANDRO", "PALACIOS PORTES CARLOS", "VIDAL PIZARRO KATHERINE CUMANDA", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "TORRES ESPINOZA JUAN CARLOS", "ARAUZ VILLAFUERTE JOFFRE FABIAN"],
+    labels: ["GUERRERO VALVERDE GABRIELA CRISTINA", "SAAVEDRA ROBLES LILEANA CAROLINA", "ZAMBRANO GOMEZ JUAN CARLOS", "VEGA VERDUGA JORGE ALBERTO", "CUENCA MARQUEZ CESAR ARTURO", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "GOMEZ LUGO EDMUNDO JAVIER", "DELGADO CRUZ AIMEE DEL ROCÍO", "MORA ALVARADO ENRIQUE ALEJANDRO", "MITE HOLGUIN EVELYN RUTH", "SANCHEZ PADILLA MARIA LORENA", "PALACIOS PORTES CARLOS", "VIDAL PIZARRO KATHERINE CUMANDA", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "MUÑOZ SALAZAR FRANS JHASMANY", "ORTEGA ASTUDILLO ROSA LETICIA", "GUERRERO FERRECCIO CARLOS AUGUSTO", "BUÑAY CAMBA DANIEL ALEXANDER", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "QUIMI BOHORQUEZ OSWALDO HENRY", "TORRES ESPINOZA JUAN CARLOS", "ARAUZ VILLAFUERTE JOFFRE FABIAN"],
     datasets: [{
       label: 'Ultima semana registrada',
-      data: [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.666666666666667, 4.75],
+      data: [3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.666666666666667, 4.916666666666667],
       backgroundColor: '#f97316',
       borderColor: '#c2410c',
       borderWidth: 1,
@@ -752,13 +752,13 @@ new Chart(document.getElementById('chart-retraso-c2'), {
 </section>
 <section id="baja">
 <h2>Baja asistencia (&lt;70%)
-  <span class="badge badge-danger">194 registros de tutoria</span>
+  <span class="badge badge-danger">196 registros de tutoria</span>
 </h2>
 <div class="two-col">
   <div>
     <h3>Tutores con mayor cantidad de estudiantes criticos</h3>
     <div class="chart-scroll">
-      <div class="chart-wrap" style="height:980px">
+      <div class="chart-wrap" style="height:1008px">
         <canvas id="chart-baja-tutor-c2" aria-label="Grafico de barras: tutores con mayor cantidad de estudiantes en estado critico" role="img"></canvas>
       </div>
     </div>
@@ -766,7 +766,7 @@ new Chart(document.getElementById('chart-retraso-c2'), {
   <div>
     <h3>Distribucion de porcentajes de asistencia</h3>
     <div class="chart-scroll">
-      <div class="chart-wrap" style="height:980px">
+      <div class="chart-wrap" style="height:1008px">
         <canvas id="chart-dist-c2" aria-label="Histograma: distribucion de porcentajes de asistencia de estudiantes" role="img"></canvas>
       </div>
     </div>
@@ -776,10 +776,10 @@ new Chart(document.getElementById('chart-retraso-c2'), {
 new Chart(document.getElementById('chart-baja-tutor-c2'), {
   type: 'bar',
   data: {
-    labels: ["PAZMIÑO SANTAMARIA MARIA FERNANDA", "VALENCIA ROBLES RICARDO ANDRES", "QUIMI BOHORQUEZ OSWALDO HENRY", "ZAMBRANO GOMEZ JUAN CARLOS", "MUÑOZ SALAZAR FRANS JHASMANY", "MITE HOLGUIN EVELYN RUTH", "LUDEÑA ZERDA JORGE FRANKLIN", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "ORTEGA ASTUDILLO ROSA LETICIA", "SALTOS ESPINOZA LUIS ALFONSO", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "SAAVEDRA ROBLES LILEANA CAROLINA", "VELEZ ASPIAZU EVA ESTHER", "VIDAL PIZARRO KATHERINE CUMANDA", "GUERRERO FERRECCIO CARLOS AUGUSTO", "GOMEZ LUGO EDMUNDO JAVIER", "TORRES ESPINOZA JUAN CARLOS", "CAMPOVERDE TABARA LAURA MARIEN", "BUÑAY CAMBA DANIEL ALEXANDER", "GUERRERO VALVERDE GABRIELA CRISTINA", "DELGADO CRUZ AIMEE DEL ROCÍO", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "MORA ALVARADO ENRIQUE ALEJANDRO", "FLORES BELTRAN PATRICIA KATHERINE", "VEGA VERDUGA JORGE ALBERTO", "SANCHEZ PADILLA MARIA LORENA", "PALACIOS PORTES CARLOS", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "FORERO FUENTES BORIS ANDREI", "CUENCA MARQUEZ CESAR ARTURO", "BREVI MARTINEZ VALENTINA", "SUCO VALLE CARLOS ANDRES", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "PEREZ MATO DAISY DE LA CARIDAD", "CHARA MOREIRA PEDRO NAPOLEÓN"],
+    labels: ["PAZMIÑO SANTAMARIA MARIA FERNANDA", "VALENCIA ROBLES RICARDO ANDRES", "QUIMI BOHORQUEZ OSWALDO HENRY", "ZAMBRANO GOMEZ JUAN CARLOS", "MUÑOZ SALAZAR FRANS JHASMANY", "MITE HOLGUIN EVELYN RUTH", "LUDEÑA ZERDA JORGE FRANKLIN", "CARVAJAL BALLESTEROS ERIKA ELIZABETH", "ORTEGA ASTUDILLO ROSA LETICIA", "SALTOS ESPINOZA LUIS ALFONSO", "SANDOVAL BAQUERIZO BOLIVAR OMAR", "SAAVEDRA ROBLES LILEANA CAROLINA", "YEPEZ QUINTANA MARIO WILLIAM", "VIDAL PIZARRO KATHERINE CUMANDA", "VELEZ ASPIAZU EVA ESTHER", "GUERRERO FERRECCIO CARLOS AUGUSTO", "TORRES ESPINOZA JUAN CARLOS", "CAMPOVERDE TABARA LAURA MARIEN", "BUÑAY CAMBA DANIEL ALEXANDER", "GUERRERO VALVERDE GABRIELA CRISTINA", "GOMEZ LUGO EDMUNDO JAVIER", "VALENCIA AVELLAN DANIELA DEL ROSARIO", "MORA ALVARADO ENRIQUE ALEJANDRO", "FLORES BELTRAN PATRICIA KATHERINE", "VEGA VERDUGA JORGE ALBERTO", "SANCHEZ PADILLA MARIA LORENA", "PALACIOS PORTES CARLOS", "PAZMIÑO FRANCO CARLOS CRISTOBAL", "DELGADO CRUZ AIMEE DEL ROCÍO", "CUENCA MARQUEZ CESAR ARTURO", "FORERO FUENTES BORIS ANDREI", "BREVI MARTINEZ VALENTINA", "SUCO VALLE CARLOS ANDRES", "ARAUZ VILLAFUERTE JOFFRE FABIAN", "PEREZ MATO DAISY DE LA CARIDAD", "CHARA MOREIRA PEDRO NAPOLEÓN"],
     datasets: [{
       label: 'Estudiantes <70%',
-      data: [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 22, 24, 31, 32],
+      data: [1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 22, 24, 31, 32],
       backgroundColor: '#ea580c',
       borderColor: '#9a3412',
       borderWidth: 1,
@@ -811,7 +811,7 @@ new Chart(document.getElementById('chart-dist-c2'), {
     labels: ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "70-80", "80-90", "90-100"],
     datasets: [{
       label: 'Estudiantes',
-      data: [0, 34, 56, 10, 0, 0, 0, 0, 0, 0],
+      data: [0, 28, 62, 10, 0, 0, 0, 0, 0, 0],
       backgroundColor: ctx => {
         const i = ctx.dataIndex;
         if (i < 7) return '#dc2626';
@@ -940,7 +940,7 @@ new Chart(document.getElementById('chart-dist-c2'), {
 </div>
 <p class="hint">Estado "ANULADA" indica que la matricula del estudiante fue anulada: el retiro voluntario es efectivo y el estudiante ya no esta activo en el programa. Un estudiante puede tener varias ordenes (Individual + Grupal); se cuentan por cedula unica.</p>
 </section></div></main>
-<footer>Generado automaticamente &middot; FAU-UG &middot; Ultima actualizacion 13/11/2026 08:34</footer>
+<footer>Generado automaticamente &middot; FAU-UG &middot; Ultima actualizacion 15/11/2026 20:11</footer>
 <script>
 document.getElementById('filtro-carrera').addEventListener('change', event => {
   document.querySelectorAll('.dashboard-panel').forEach(panel => {
